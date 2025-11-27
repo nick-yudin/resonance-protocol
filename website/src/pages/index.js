@@ -169,6 +169,10 @@ export default function Home() {
         
         {/* Custom Styles */}
         <style>{`
+          /* Smooth Scrolling & Fix for Header Overlap */
+          html { scroll-behavior: smooth; }
+          section { scroll-margin-top: 100px; }
+
           body { background-color: #050505; color: #e5e5e5; overflow-x: hidden; margin: 0; }
           .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
           .glow-text { text-shadow: 0 0 20px rgba(255, 77, 0, 0.5); }
@@ -193,11 +197,11 @@ export default function Home() {
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
             <a href="#shift" className="hover:text-signal transition-colors">The Shift</a>
-            <Link to="/docs/manifesto" className="hover:text-signal transition-colors">Manifesto</Link>
+            <a href="#axioms" className="hover:text-signal transition-colors">Axioms</a>
             <a href="#future" className="hover:text-signal transition-colors">Future History</a>
-            <Link to="/docs/unified-spec" className="text-white border border-white/20 px-4 py-1.5 rounded-full hover:bg-white hover:text-black transition-all">
-              Read Protocol
-            </Link>
+            <a href="/whitepaper.pdf" target="_blank" className="text-white border border-white/20 px-4 py-1.5 rounded-full hover:bg-white hover:text-black transition-all">
+              Whitepaper (PDF)
+            </a>
           </div>
         </div>
       </nav>
@@ -225,8 +229,8 @@ export default function Home() {
               Read Specification
               <svg className="group-hover:translate-y-1 transition-transform" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
             </Link>
-            <a href="#shift" className="px-8 py-4 border border-white/20 text-white rounded hover:border-signal hover:text-signal transition-all">
-              Explore the Shift
+            <a href="/whitepaper.pdf" target="_blank" className="px-8 py-4 border border-white/20 text-white rounded hover:border-signal hover:text-signal transition-all">
+              Download Whitepaper (L0)
             </a>
           </div>
         </div>
@@ -284,7 +288,7 @@ export default function Home() {
       </section>
 
       {/* Section: Manifesto (4 Axioms) */}
-      <section id="manifesto" className="py-32 px-6 border-t border-white/5 bg-[#050505]">
+      <section id="axioms" className="py-32 px-6 border-t border-white/5 bg-[#050505]">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-center text-4xl font-display font-bold text-white mb-20">The Four Axioms</h2>
           

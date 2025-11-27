@@ -21,6 +21,13 @@ const config = {
     locales: ['en'],
   },
 
+  // --- ENABLE DIAGRAMS ---
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+  // -----------------------
+
   presets: [
     [
       'classic',
@@ -55,7 +62,6 @@ const config = {
           srcDark: 'img/logo.svg', 
         },
         items: [
-          // FIX: Direct links to documents instead of generic sidebar
           {
             to: '/docs/manifesto',
             position: 'left',
