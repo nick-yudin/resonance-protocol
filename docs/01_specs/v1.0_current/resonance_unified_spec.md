@@ -1,3 +1,11 @@
+---
+id: unified-spec
+title: Resonance Unified Specification (Level 1)
+permalink: /docs/unified-spec
+description: The technical standard for Resonance Protocol Level 1.
+---
+
+
 # Resonance Unified Specification (Level 1)
 
 **Version:** 1.0.0 (Ironclad)
