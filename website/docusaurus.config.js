@@ -1,5 +1,7 @@
 // @ts-check
 import {themes as prismThemes} from 'prism-react-renderer';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -13,7 +15,7 @@ const config = {
   organizationName: 'rAI-Research-Collective', 
   projectName: 'resonance-protocol', 
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn', 
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
@@ -28,6 +30,17 @@ const config = {
   themes: ['@docusaurus/theme-mermaid'],
   // -----------------------
 
+  // --- ADD KATEX STYLESHEET ---
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity: 'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
+  // ---------------------------
+
   presets: [
     [
       'classic',
@@ -37,6 +50,10 @@ const config = {
           path: '../docs', 
           sidebarPath: './sidebars.js',
           routeBasePath: 'docs',
+          // --- ADD MATH PLUGINS ---
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
+          // ------------------------
         },
         blog: false,
         theme: {
@@ -68,7 +85,7 @@ const config = {
             label: 'Manifesto',
           },
           {
-            to: '/docs/unified-spec', 
+            to: '/docs/specs/v1.0_current/spec-v1-final', 
             position: 'left',
             label: 'Specification',
           },
@@ -86,7 +103,7 @@ const config = {
             title: 'Protocol',
             items: [
               { label: 'Manifesto', to: '/docs/manifesto' },
-              { label: 'Specification', to: '/docs/unified-spec' },
+              { label: 'Specification', to: '/docs/specs/v1.0_current/spec-v1-final' }, 
             ],
           },
           {

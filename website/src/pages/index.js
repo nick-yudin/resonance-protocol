@@ -225,7 +225,7 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col md:flex-row justify-center gap-4 mt-12">
-            <Link to="/docs/unified-spec" className="group px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+            <Link to="/docs/specs/v1.0_current/spec-v1-final" className="group px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
               Read Specification
               <svg className="group-hover:translate-y-1 transition-transform" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
             </Link>
@@ -388,7 +388,7 @@ export default function Home() {
                 <div className="text-xs font-mono text-signal mb-2">CASE: THE BODY THAT DIAGNOSED ITSELF</div>
                 <h4 className="text-2xl font-bold text-white mb-4">30-Second Semantic Medicine</h4>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  "People used to wear 'health trackers' that streamed everything to the cloud. It was convenient, but it was surveillance. The new generation tracks nothing. No continuous recording, no streaming. A tiny semantic model runs on-skin. Millions of micro-signals stay local. When patterns drift into meaningful territory — a perfusion mismatch, a metabolic stress vector — the wearable emits a single semantic event. Not data, meaning: 'Act Now'. You walk into a clinic. No upload. Your wearable and the room’s mesh converge on a diagnosis in thirty seconds. The device never gives away your secrets. It never even had them."
+                  "People used to wear 'health trackers' that streamed everything to the cloud. It was convenient, but it was surveillance. The new generation tracks nothing. No continuous recording, no streaming. A tiny semantic model runs on-skin. Millions of micro-signals stay local. When patterns drift into meaningful territory — a perfusion mismatch, a metabolic stress vector — the wearable emits a single semantic event. Not data, meaning: 'Act Now'. You walk into a clinic. No upload. Your wearable and the room's mesh converge on a diagnosis in thirty seconds. The device never gives away your secrets. It never even had them."
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-2 py-1 bg-white/10 rounded text-xs text-gray-300">Wearables: Local-Only</span>
