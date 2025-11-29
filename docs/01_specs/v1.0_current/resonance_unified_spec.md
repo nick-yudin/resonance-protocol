@@ -1,188 +1,167 @@
----
-id: unified-spec
-title: Level 1 Unified Spec
-slug: /unified-spec
-sidebar_position: 1
----
+# Resonance Unified Specification (Level 1)
 
-# RESONANCE
-## Semantic Event Protocol
-### Level 1 Unified Specification (Gold Master)
+**Version:** 1.0.0 (Ironclad)
 
-**Version:** 1.0
-**Status:** Frozen for Implementation
-**Author:** rAI Research Collective
+**Status:** Implemented (Python Reference)
+
 **Date:** November 2025
 
----
 
-## Abstract
-
-RESONANCE is a protocol for **meaning-triggered intelligence**. Unlike traditional systems driven by clock cycles or raw data streams, Resonance nodes operate in default silence, emitting events only when a semantic threshold is breached.
-
-This Level 1 Specification unifies the visionary "Quiet Mesh" philosophy with a concrete engineering standard. It defines a canonical wire protocol, a 256-dimensional embedding standard, and a "Reference Concept" alignment mechanism that allows heterogeneous AI models (e.g., MobileNet vs. ResNet) to understand each other without sharing weights.
 
 ---
 
-## 1. Core Axioms (The "North Star")
 
-The following invariants are non-negotiable foundations of the protocol:
 
-1.  **Silence is Default:** A node transmitting data without a change in meaning is malfunctioning.
-2.  **Meaning, Not Data:** We exchange semantic deltas (Δμ), not raw sensor frames.
-3.  **Local Autonomy:** Intelligence is pushed to the extreme edge; there is no central cloud brain.
-4.  **Trust is Provenance:** Every semantic event is cryptographically signed at the hardware source.
+## 1. Introduction
 
----
+This document defines the technical standard for **Resonance Protocol Level 1**. Any node compliant with this specification can join the mesh, filter noise, and exchange semantic events, regardless of the underlying hardware or programming language.
 
-## 2. Semantic Representation
 
-To ensure interoperability between devices ranging from microcontrollers to edge servers, we define a canonical semantic space.
 
-### 2.1 The Semantic Vector
-State is represented as a fixed-dimension embedding vector `M` in `R^n`.
+## 2. The Semantic Layer (Layer 7)
 
-* **Standard Dimension:** **256-d** (Float32 or Quantized Int8). This is the mandatory baseline for Level 1 compliance.
-* **High-Fidelity:** 512-d (Optional for server nodes).
-* **Low-Power:** 128-d (Optional for < 1mW sensors).
 
-### 2.2 Semantic Distance
-Nodes MUST use **Cosine Distance** to calculate semantic shift:
 
-```math
-d(M_t, M_{t-1}) = 1 - (M_t · M_{t-1}) / (||M_t|| ||M_{t-1}||)
-```
+### 2.1. Vector Space
 
-### 2.3 The Event Trigger
-An event is emitted if and only if:
+All nodes must project data into a shared vector space before processing.
 
-```math
-d(M_{current}, M_{last_sent}) > theta
-```
+- **Model:** `sentence-transformers/all-MiniLM-L6-v2`
 
-**Recommended Thresholds (θ):**
-* **0.08:** High Sensitivity (Precision Monitoring)
-* **0.15:** Standard Presence/State Change (**Default**)
-* **0.25:** Anomaly Detection Only
-* **0.40:** Critical Failures Only
+- **Dimensions ($D$):** 384 floating point values.
 
----
+- **Normalization:** All vectors must be unit-normalized ($||v|| = 1$).
 
-## 3. Semantic Alignment (The "Rosetta Stone")
 
-The critical challenge is allowing Node A (using Model X) to talk to Node B (using Model Y). We solve this via **Reference Concept Alignment**.
 
-### 3.1 The Concept Set
-The protocol defines **100 Canonical Concepts** (see Appendix A) representing universal constants in the physical world (e.g., `REF_002: Fire`, `REF_050: Human Voice`).
+### 2.2. The Silence Mechanism
 
-### 3.2 The Handshake Protocol (Procrustes Analysis)
-When two nodes meet, they do not exchange model weights. They exchange their understanding of the constants.
+To ensure energy efficiency ("Silence is Default"), nodes must calculate the Cosine Distance ($d$) between the current input vector ($v_t$) and the last transmitted vector ($v_{t-1}$).
 
-1.  **Request:** Node A sends its embedding vectors for the 100 Reference Concepts.
-2.  **Calculation:** Node B compares A's vectors to its own using Orthogonal Procrustes analysis to find a rotation matrix `R` that minimizes the error:
-    `min || X_B - X_A R ||`
-3.  **Agreement:** If the alignment error is < 0.20, the connection is established. Node B will apply matrix `R` to all incoming events from Node A.
+
+
+$$d = 1 - \frac{v_t \cdot v_{t-1}}{||v_t|| ||v_{t-1}||}$$
+
+
+
+- **Threshold ($\theta$):** **0.35**
+
+- **Logic:**
+
+  - If $d < 0.35$: DROP packet (Noise/Synonym). Update internal state only.
+
+  - If $d \ge 0.35$: TRANSMIT Event (Significant Shift).
+
+
 
 ---
 
-## 4. Canonical Wire Protocol
 
-We use **Protocol Buffers (proto3)** for efficiency and strict typing.
 
-### 4.1 Transport
-* **Discovery:** UDP Multicast on port `5353`.
-* **Transport:** TCP (Reliable) or QUIC (Low Latency) on port `7741`.
+## 3. The Alignment Layer (Layer 6)
 
-### 4.2 The Semantic Event Schema
-This is the atomic unit of the Resonance network.
+
+
+Nodes with different internal representations ("Alien Minds") must align spaces using the **Procrustes Handshake**.
+
+
+
+### 3.1. Calibration Protocol
+
+1.  **Seed Exchange:** Nodes agree on a random seed.
+
+2.  **Synthetic Anchors:** Both nodes generate **1000** random vectors (Gaussian Noise) from the seed.
+
+3.  **Solver:** The Receiver computes the Orthogonal Procrustes Matrix ($R$) that minimizes the Frobenius norm between its anchors ($A$) and the sender's anchors ($B$).
+
+    $$\min_R || A R - B ||_F \quad \text{s.t.} \quad R^T R = I$$
+
+4.  **Translation:** All subsequent incoming semantic events $v_{in}$ are rotated:
+
+    $$v_{aligned} = v_{in} \cdot R$$
+
+
+
+---
+
+
+
+## 4. The Transport Layer (Layer 4)
+
+
+
+### 4.1. Wire Format
+
+Data is serialized using **Protocol Buffers v3**.
+
+
+
+**`resonance.proto` definition:**
 
 ```protobuf
+
 syntax = "proto3";
-package resonance.v1;
+
+package resonance;
+
+
 
 message SemanticEvent {
-  // --- Core Identity ---
-  bytes event_id = 1;           // 16-byte UUID
-  uint64 timestamp_us = 2;      // Microseconds since Epoch
-  string node_id = 3;           // Source Identifier
 
-  // --- The Meaning ---
-  string domain = 4;            // e.g., "vision", "audio", "vibration"
-  uint32 embedding_dim = 5;     // e.g., 256
-  repeated float delta_vector = 6; // The change in meaning (Δμ)
-  
-  // --- Confidence & Context ---
-  float confidence = 7;         // 0.0 to 1.0
-  float distance_from_prev = 8; // The magnitude of the shift
-  map<string, string> tags = 9; // Lightweight metadata
+  string source_id = 1;       // UUID of the emitter (8 chars)
 
-  // --- Network Control ---
-  uint32 ttl = 10;              // Time-to-Live (hops)
-  repeated string trace = 11;   // Loop prevention
+  int64 created_at = 2;       // Unix Timestamp
 
-  // --- Security ---
-  Provenance provenance = 12;
+  repeated float embedding = 3; // The 384-d vector
+
+  string debug_label = 4;     // Optional text (e.g., "Fire detected")
+
+  int32 ttl = 5;              // Time To Live (default: 3 hops)
+
 }
 
-message Provenance {
-  string model_hash = 1;        // SHA-256 of the model weights
-  string hardware_id = 2;       // Hardware Attestation ID
-  bytes signature = 3;          // ECDSA Signature of the event
-}
 ```
 
----
+### 4.2. Stream Framing (TCP)
 
-## 5. Hardware Implementation Guide
+Since TCP is a stream, messages must be framed.
 
-### 5.1 Current Generation (Level 1 Reference)
-For immediate implementation (v1.0), we target available commercial hardware:
-* **Compute:** Raspberry Pi 4 / 5 or NVIDIA Jetson Nano.
-* **Sensors:** Standard USB Cameras or I2S Microphones.
-* **Power Target:** < 2W average (achieved via deep sleep between polling).
+- **Prefix:** 4 bytes (Unsigned Integer, Big-Endian) representing the payload length.
 
-### 5.2 Future Target (The "Resonance Native" Chip)
-The ultimate goal of the rAI Collective is the **Resonance ASIC**:
-* **Architecture:** Neuromorphic / Event-based.
-* **Process:** 1-bit logic, asynchronous (clock-less).
-* **Power Target:** < 1mW active.
-* **Integration:** The sensor *is* the processor.
+- **Payload:** The binary Protobuf data.
+
+
 
 ---
 
-## 6. Implementation Roadmap
 
-1.  **Phase Alpha:** Python SDK implementing the Protobuf schema and Cosine logic.
-2.  **Phase Beta:** "The Factory Demo" — 5 Raspberry Pis detecting anomalies in motor vibrations using the Reference Concept alignment.
-3.  **Phase Gamma:** Porting the core logic to C++/Rust for microcontroller support (ESP32).
 
----
+## 5. Network Behavior (Gossip)
 
-## Appendix A: The Canonical Reference Concepts (Subset)
 
-These are the "anchors" used for alignment.
 
-**Vision (000-049):**
-* `REF_000`: Person / Human
-* `REF_001`: Fire / Flame
-* `REF_002`: Vehicle / Car
-* `REF_003`: Animal / Dog
-* `REF_004`: Plant / Tree
-* `REF_005`: Water / Liquid
-* ...
+- **Topology:** Mesh (Ad-hoc).
 
-**Audio (050-074):**
-* `REF_050`: Human Speech
-* `REF_051`: Siren / Alarm
-* `REF_052`: Glass Breaking
-* `REF_053`: Impact / Thud
-* ...
+- **Echo Suppression:** Nodes must maintain a `memory` cache of recently seen `event_id`s. If an ID is in memory, the packet is dropped immediately.
 
-**Physics/IMU (075-099):**
-* `REF_075`: Vibration (High Freq)
-* `REF_076`: Freefall
-* `REF_077`: Rotation
-* ...
+- **Semantic Routing:** Even if a packet is new, a node MAY drop it if the vector content is semantically redundant to the node's current knowledge (distance < $\theta$), preventing information floods.
+
+
 
 ---
-*End of Specification Level 1.0*
+
+
+
+## 6. Reference Implementation
+
+The official Python implementation of this spec is available in:
+
+`/reference_impl/python`
+
+
+
+- `sender.py`: Implements Threshold Logic.
+
+- `alignment.py`: Implements Procrustes Solver.
+
+- `gossip.py`: Implements Mesh Propagation.
