@@ -23,6 +23,14 @@ That's it! You'll see:
 
 ---
 
+## 🎬 See It In Action
+
+[![asciicast](https://asciinema.org/a/Bh7Gt17Pd1YvAeBPENYWqFfSj.svg)](https://asciinema.org/a/Bh7Gt17Pd1YvAeBPENYWqFfSj)
+
+*Interactive demo showing semantic filtering, Procrustes alignment, and mesh propagation in real-time*
+
+---
+
 ## 📁 What's Inside
 
 | File | Purpose | Key Concept |

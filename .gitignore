@@ -21,3 +21,4 @@ yarn-error.log
 # --------------------
 # Crucially, the built static files must not be tracked.
 website/build/
+.vscode/
