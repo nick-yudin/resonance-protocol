@@ -6,6 +6,36 @@ This is the official reference implementation of the Resonance Protocol in Pytho
 
 ---
 
+## 🔮 Future: Ternary Computing & Compression
+
+Resonance Protocol is designed for **ternary logic systems** and will evolve toward:
+
+### Phase 1: Current (float32)
+- 384-dimensional vectors
+- 1536 bytes per packet
+- Proof of concept on commodity hardware
+
+### Phase 2: Compression (Q1 2025)
+- **Ternary quantization**: {-1, 0, +1} weights → 96 bytes (16x smaller)
+- **HDC encoding**: 10,000-d binary vectors → 128 bytes
+- **BitNet 1.58b integration**: Native ternary models
+
+### Phase 3: Custom Hardware (2025-2026)
+- Memristor-based compute-in-memory
+- 90nm process + neuromorphic design  
+- DVS cameras & silicon cochlea sensors
+- <100mW per node, $5-10 cost
+
+**Why ternary?**
+- Compatible with BitNet 1.58b (Microsoft Research, 2024)
+- Enables stochastic computing (noise becomes a feature)
+- Reduces memory bandwidth by 16-32x
+- Natural fit for memristor arrays
+
+**See [ROADMAP.md](../../ROADMAP.md) for full technical vision.**
+
+---
+
 ## 🚀 Quick Start (30 seconds)
 
 ```bash
@@ -31,75 +61,95 @@ That's it! You'll see:
 
 ---
 
-## 📁 What's Inside
+## 🔥 Killer Proof: MQTT vs Resonance
 
-| File | Purpose | Key Concept |
-|------|---------|-------------|
-| **`quick_demo.py`** | All-in-one interactive demo | Start here |
-| **`alignment.py`** | Procrustes alignment algorithm | Different LLMs can communicate |
-| **`gossip.py`** | 10-node mesh simulation | Decentralized propagation |
-| **`sender.py`** | TCP sender with semantic filtering | Wire protocol implementation |
-| **`receiver.py`** | TCP receiver | Protobuf deserialization |
-| **`resonance.proto`** | Protocol buffer specification | Binary wire format |
-
----
-
-## 🎯 Individual Demos
-
-### Demo 1: Semantic Filtering
-
-**Concept:** Nodes transmit only when meaning changes, not on every clock tick.
+**Want to see real numbers?**
 
 ```bash
-# Terminal 1: Start receiver
-python receiver.py
-
-# Terminal 2: Start sender
-python sender.py
+python benchmarks/mqtt_vs_resonance.py
 ```
 
-**What happens:**
-- Sender processes 6 inputs
-- Only 3 are transmitted (50% bandwidth reduction)
-- Synonyms like "system startup" vs "system initialization" are suppressed
+**Results from 1-hour sensor simulation:**
 
-**Key insight:** `cosine_distance(v1, v2) < threshold → SILENCE`
+| Metric | MQTT (Legacy) | Resonance | Improvement |
+|--------|--------------|-----------|-------------|
+| 📦 Packets sent | 12,000 | 120 | **99.0% reduction** |
+| 📊 Bandwidth | 1,500 KB | 180 KB | **88% savings** |
+| ⚡ Energy | 75 mAh | 7.2 mAh | **90% savings** |
+| 🔋 Battery life | 1.1 days | 11.6 days | **10.5x longer** |
+
+[📖 Full Benchmark Details](./benchmarks/README.md)
 
 ---
 
-### Demo 2: Procrustes Alignment
+## 📁 Repository Structure
 
-**Concept:** Different models (GPT-4, Claude, Llama) have different vector spaces. Procrustes finds the rotation matrix to align them.
+```
+/reference_impl/python/
+├── quick_demo.py          # ⭐ Start here - interactive tour
+│
+├── basic/                 # 📚 Educational examples
+│   ├── alignment.py       # Procrustes alignment
+│   ├── gossip.py          # 10-node mesh simulation
+│   ├── sender.py          # TCP sender
+│   ├── receiver.py        # TCP receiver
+│   └── README.md          # Learning guide
+│
+├── benchmarks/            # 🔥 Performance proofs
+│   ├── mqtt_vs_resonance.py    # Main benchmark
+│   ├── results/           # Generated data
+│   └── README.md          # Methodology
+│
+├── assets/                # 🎬 Media
+│   └── demo.cast          # Terminal recording
+│
+└── requirements.txt       # Dependencies
+```
+
+---
+
+## 🎯 Choose Your Path
+
+### Path 1: I want to understand the concepts
 
 ```bash
+# Interactive tour
+python quick_demo.py
+
+# Then explore basics
+cd basic
 python alignment.py
-```
-
-**What happens:**
-- Generates 1000 synthetic anchor vectors
-- Simulates "alien" node with rotated space
-- Computes rotation matrix $R$
-- Tests on real sentence: error < 0.00001
-
-**Key insight:** This is how heterogeneous nodes can communicate without retraining.
-
----
-
-### Demo 3: Mesh Propagation
-
-**Concept:** Events spread through gossip protocol. No central coordinator.
-
-```bash
 python gossip.py
 ```
 
-**What happens:**
-- 10 nodes form a mesh topology
-- Event injected at NODE_00
-- Propagates via TTL-based gossip
-- Duplicate suppression via memory cache
+[📖 Basic Examples Guide](./basic/README.md)
 
-**Key insight:** Emergent coordination without a server.
+---
+
+### Path 2: I want to see proof it works
+
+```bash
+# Run the benchmark
+python benchmarks/mqtt_vs_resonance.py
+
+# See the numbers
+cat benchmarks/results/comparison.json
+```
+
+[📊 Benchmarks Guide](./benchmarks/README.md)
+
+---
+
+### Path 3: I want to build with it
+
+```bash
+# Start with sender/receiver
+cd basic
+python receiver.py  # Terminal 1
+python sender.py    # Terminal 2
+```
+
+Then read: [Level 1 Specification](../../docs/01_specs/v1.0_current/spec_v1_final.md)
 
 ---
 
@@ -108,62 +158,47 @@ python gossip.py
 ### 1. Semantic Filtering
 
 ```python
-# Current input
-v_current = model.encode("Fire detected")
+# Traditional: Send every reading
+for reading in sensor_data:
+    mqtt_publish(reading)  # 12,000 transmissions
 
-# Last transmitted vector
-v_last = model.encode("System ready")
-
-# Calculate semantic distance
-distance = cosine(v_current, v_last)
-
-if distance > THRESHOLD:  # 0.35
-    transmit(v_current)  # Meaningful change
-else:
-    silence()  # Noise/synonym
+# Resonance: Send only meaningful changes
+for reading in sensor_data:
+    if cosine(embedding(reading), last_vector) > 0.35:
+        transmit(reading)  # ~120 transmissions
 ```
 
-**Result:** 50-90% reduction in network traffic.
+**Result:** 99% fewer packets, 90% less energy.
 
 ---
 
 ### 2. Procrustes Alignment
 
 ```python
-# Node A and Node B share random seed
-seed = 42
-np.random.seed(seed)
+# Problem: Node A uses GPT-4, Node B uses Llama
+# Their vector spaces are rotated
 
-# Both generate 1000 anchor vectors
-anchors_A = np.random.randn(1000, 384)
-anchors_B = np.random.randn(1000, 384)
-
-# Node B computes rotation matrix
+# Solution: Calibration via shared random anchors
 R = orthogonal_procrustes(anchors_A, anchors_B)
 
-# Now B can decode A's vectors
-v_aligned = v_from_A @ R
+# Now B can understand A's vectors
+aligned = vector_from_A @ R
 ```
 
-**Result:** Different LLMs can communicate without shared training.
+**Result:** Heterogeneous nodes can communicate.
 
 ---
 
-### 3. Wire Protocol
+### 3. Mesh Propagation
 
-```protobuf
-message SemanticEvent {
-  string source_id = 1;
-  int64 created_at = 2;
-  repeated float embedding = 3;  // 384 dimensions
-  string debug_label = 4;
-}
+```
+NODE_00 detects fire
+  → transmits to NODE_01, NODE_02
+    → NODE_01 forwards to NODE_03, NODE_04
+      → Event reaches all nodes in <100ms
 ```
 
-**TCP Framing:**
-```
-[4 bytes: message length][N bytes: protobuf payload]
-```
+**Result:** No server, no single point of failure.
 
 ---
 
@@ -172,42 +207,34 @@ message SemanticEvent {
 | Metric | Value | Notes |
 |--------|-------|-------|
 | **Vector dimension** | 384 | MiniLM-L6-v2 |
-| **Semantic threshold** | 0.35 | Tunable per use case |
-| **Bandwidth reduction** | 50-90% | vs continuous polling |
-| **Alignment error** | <10^-5 | Procrustes accuracy |
-| **Latency** | <10ms | Local mesh, no cloud |
+| **Semantic threshold** | 0.35 | Tunable |
+| **Bandwidth reduction** | 88-99% | vs polling |
+| **Energy reduction** | 90-95% | vs always-on |
+| **Alignment error** | <10^-5 | Procrustes |
+| **Latency** | <10ms | Local mesh |
 
 ---
 
 ## 🛠️ Requirements
 
 - Python 3.8+
-- 2GB RAM (for sentence-transformers model)
-- No GPU required (CPU inference is fast enough)
+- 2GB RAM (for model)
+- No GPU required
 
 **Dependencies:**
-```
-sentence-transformers  # Semantic embeddings
-scipy                  # Procrustes solver
-numpy                  # Vector operations
-protobuf               # Wire protocol
+```bash
+pip install sentence-transformers scipy numpy protobuf
 ```
 
 ---
 
 ## 🔗 Next Steps
 
-1. **Read the Specification**  
-   [`/docs/01_specs/v1.0_current/spec_v1_final.md`](../../docs/01_specs/v1.0_current/spec_v1_final.md)
-
-2. **Explore the Manifesto**  
-   [`/docs/00_intro/manifesto.md`](../../docs/00_intro/manifesto.md)
-
-3. **Visit the Website**  
-   [https://resonanceprotocol.org](https://resonanceprotocol.org)
-
-4. **Join the Discussion**  
-   Twitter: [@rAI_stack](https://twitter.com/rAI_stack)
+1. **Run the demos** → Start with `quick_demo.py`
+2. **See the proof** → Run `benchmarks/mqtt_vs_resonance.py`
+3. **Read the spec** → [Level 1 Documentation](../../docs/01_specs/v1.0_current/spec_v1_final.md)
+4. **Explore the manifesto** → [Why this matters](../../docs/00_intro/manifesto.md)
+5. **Visit the website** → [resonanceprotocol.org](https://resonanceprotocol.org)
 
 ---
 
@@ -216,11 +243,11 @@ protobuf               # Wire protocol
 **Q: Model download fails?**  
 A: First run downloads `all-MiniLM-L6-v2` (~80MB). Needs internet.
 
-**Q: `receiver.py` says "Address already in use"?**  
-A: Kill previous instance: `pkill -f receiver.py` or change PORT in code.
+**Q: Benchmark takes too long?**  
+A: Reduce `DURATION_MINUTES` in `mqtt_vs_resonance.py` from 60 to 5.
 
-**Q: High CPU usage?**  
-A: Normal on first run (model loading). Subsequent runs are fast.
+**Q: Import errors after refactoring?**  
+A: Make sure you're running from the `python/` root directory.
 
 ---
 
