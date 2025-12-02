@@ -1,0 +1,27 @@
+{
+  "phase": "1.1",
+  "date": "2025-12-02 18:08:57",
+  "approach": "Projection HDC with Semantic Seed",
+  "baseline": {
+    "method": "SentenceTransformers (Baseline)",
+    "dimensions": 384,
+    "spearman_correlation": 0.8203246160625794,
+    "p_value": 0.0,
+    "encoding_time_seconds": 19.64237880706787,
+    "pairs_per_second": 70.20534597896044
+  },
+  "projection_hdc": {
+    "method": "Projection HDC (Phase 1.1, binary=True)",
+    "hd_dimensions": 10000,
+    "spearman_correlation": 0.8201095376685794,
+    "p_value": 0.0,
+    "encoding_time_seconds": 57.36992001533508,
+    "pairs_per_second": 24.03698662350219,
+    "semantic_seed": "SentenceTransformer (all-MiniLM-L6-v2)"
+  },
+  "comparison": {
+    "status": "\u2705 SUCCESS",
+    "gap_percent": 0.026218693159834053,
+    "speed_ratio": 0.3423811433207058
+  }
+}
