@@ -1,0 +1,68 @@
+{
+  "phase": "M2.5",
+  "date": "2025-12-02 20:02:33",
+  "config": {
+    "full_dataset_size": 2000,
+    "target_subset_size": 500,
+    "dedup_threshold": 0.95
+  },
+  "random_baseline": {
+    "method": "Random Baseline",
+    "subset_size": 500,
+    "diversity": {
+      "mean_distance": 0.9501723051071167,
+      "std_distance": 0.07143466174602509,
+      "min_distance": 0.3626667261123657,
+      "max_distance": 1.1549999713897705,
+      "median_distance": 0.9603333473205566
+    },
+    "coverage": {
+      "mean_nn_distance": 0.4812319874763489,
+      "max_nn_distance": 0.8506666421890259,
+      "median_nn_distance": 0.6138333082199097,
+      "coverage_at_01": 0.25,
+      "coverage_at_02": 0.2505,
+      "coverage_at_05": 0.3195
+    }
+  },
+  "hdc_curated": {
+    "method": "HDC-Curated",
+    "subset_size": 500,
+    "diversity": {
+      "mean_distance": 0.9543778300285339,
+      "std_distance": 0.06857054680585861,
+      "min_distance": 0.39033329486846924,
+      "max_distance": 1.156333327293396,
+      "median_distance": 0.9643333554267883
+    },
+    "coverage": {
+      "mean_nn_distance": 0.44827795028686523,
+      "max_nn_distance": 0.8140000104904175,
+      "median_nn_distance": 0.5718332529067993,
+      "coverage_at_01": 0.25,
+      "coverage_at_02": 0.2505,
+      "coverage_at_05": 0.374
+    },
+    "curation_stats": {
+      "original_size": 2000,
+      "unique_after_dedup": 2000,
+      "duplicates_removed": 0,
+      "duplicate_groups": 0,
+      "avg_duplicate_group_size": 0,
+      "n_clusters": 500,
+      "curated_size": 500,
+      "sampling_strategy": "nearest_centroid",
+      "dedup_threshold": 0.95,
+      "sparsity": 0.7
+    }
+  },
+  "comparison": {
+    "status": "\u2705 SUCCESS",
+    "improvements": [
+      "diversity",
+      "coverage"
+    ],
+    "diversity_improvement_pct": 0.4426065566016608,
+    "coverage_improvement_pct": 6.847848448790665
+  }
+}
