@@ -328,14 +328,14 @@ Key findings:
 
 ---
 
-## Phase M2.5b: Curation Methods Comparison (⚠️ PARTIAL SUCCESS)
+## Phase M2.5b: Curation Space Comparison (⚠️ PARTIAL SUCCESS)
 
 **Date:** 2025-12-02 20:40:18
 
 **Status:** ⚠️ PARTIAL SUCCESS
 
 ### Goal
-Compare data quality metrics across three curation methods: Random, SentenceTransformer (ST), and HDC. Originally planned to include fine-tuning comparison, but pivoted to data quality metrics due to compute constraints.
+Compare data quality metrics across three curation methods: Random, SentenceTransformer (ST), and HDC. This phase evaluates curation space properties, not downstream fine-tuning performance (see Phase M2.5c for fine-tuning validation).
 
 ### Hypothesis
 HDC curation produces higher-quality subsets than both random sampling AND SentenceTransformer-based curation, as measured by diversity and coverage metrics.
@@ -423,7 +423,7 @@ HDC curation produces higher-quality subsets than both random sampling AND Sente
 
 ### Conclusion
 
-**HDC is competitive with SentenceTransformer, both better than Random on coverage.**
+**HDC and ST produce comparable coverage and diversity trade-offs. No clear winner.**
 
 Key findings:
 1. ⚠️ **Random sampling achieves best diversity** — Curation introduces slight bias toward cluster centroids
@@ -437,9 +437,11 @@ Key findings:
 - **Evaluation bias:** Using HDC encoder for evaluation may favor HDC slightly, though effect appears minimal
 
 **Honest assessment:**
-- HDC achieves goal of matching ST performance while offering 16× compression (2,500 bytes vs 1,536 bytes for 384d float32)
+- HDC and ST show comparable curation quality in this experiment
+- HDC vectors are larger (2,500 bytes vs 1,536 bytes for ST float32)
+- HDC uses simpler operations (XOR/Popcount vs float cosine) suitable for edge deployment
 - For data curation specifically, ST's 384d embeddings are sufficient and faster to compute
-- HDC's advantage lies in transmission efficiency, not curation quality
+- **Limitation:** This phase only measures data quality metrics, not downstream fine-tuning performance
 
 **Limitations:**
 - **No fine-tuning validation:** Data quality metrics are proxy, not ground truth
@@ -448,9 +450,11 @@ Key findings:
 
 ### Key Insight
 
-**HDC and SentenceTransformer produce comparable curation quality.** HDC's advantage is compression (16× smaller), not superior semantic representation. For data curation, the choice between HDC and ST depends on whether transmission bandwidth or compute speed is the bottleneck.
+**HDC and SentenceTransformer produce comparable curation quality.** HDC uses simpler operations (XOR/Popcount) suitable for constrained hardware, but offers no clear advantage in curation metrics. For data curation, ST is faster to compute; HDC may be preferable when compute primitives (not bandwidth) are the bottleneck.
 
 **Correction from Phase M2.5a:** The claim that "10,000-dimensional HDC space provides better separation than low-dim embeddings" was premature. Phase M2.5b shows that 384d SentenceTransformer embeddings achieve comparable (and in some metrics, superior) curation quality.
+
+**Next:** Phase M2.5c will validate whether curated subsets (HDC or ST) improve downstream fine-tuning performance vs random sampling.
 
 ### Files Created
 - `hdc/st_curator.py` — SentenceTransformer-based data curator (baseline)
