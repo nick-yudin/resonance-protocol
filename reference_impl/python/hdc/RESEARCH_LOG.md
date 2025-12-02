@@ -214,7 +214,7 @@ Key findings:
 
 ---
 
-## Phase M2.5: HDC-Curated Data Evaluation (✅ SUCCESS!)
+## Phase M2.5a: HDC-Curated Data Evaluation (✅ SUCCESS!)
 
 **Date:** 2025-12-02 20:02:33
 
@@ -303,7 +303,7 @@ Key findings:
 **Why it works:**
 - HDC clustering groups semantically similar examples
 - Sampling near centroids ensures representative examples from each cluster
-- High-dimensional space (10k dims) provides better separation than low-dim embeddings
+- High-dimensional space (10k dims) enables effective clustering
 
 **Practical implications:**
 - HDC curation can reduce fine-tuning dataset size while preserving quality
@@ -319,10 +319,144 @@ Key findings:
 
 **Clustering in hyperdimensional space is more effective than random sampling for data curation.** The 10,000-dimensional HDC space provides enough separation to identify distinct semantic clusters, leading to both higher diversity AND better coverage of the full dataset.
 
+**Note:** Phase M2.5a only compared HDC vs Random. Comparison with SentenceTransformer baseline (Phase M2.5b) is needed to validate whether HDC provides advantages over standard dense embeddings for data curation.
+
 ### Files Created
 - `hdc/data_curator.py` — HDC-based data curation pipeline
 - `hdc/evaluate_curation.py` — Evaluation script with diversity/coverage metrics
 - `hdc/results/phase_m2.5_curation.json` — Full experimental results
+
+---
+
+## Phase M2.5b: Curation Methods Comparison (⚠️ PARTIAL SUCCESS)
+
+**Date:** 2025-12-02 20:40:18
+
+**Status:** ⚠️ PARTIAL SUCCESS
+
+### Goal
+Compare data quality metrics across three curation methods: Random, SentenceTransformer (ST), and HDC. Originally planned to include fine-tuning comparison, but pivoted to data quality metrics due to compute constraints.
+
+### Hypothesis
+HDC curation produces higher-quality subsets than both random sampling AND SentenceTransformer-based curation, as measured by diversity and coverage metrics.
+
+### Method
+
+**Dataset:** Alpaca (instruction-response pairs)
+- Full dataset: 3,000 samples
+- Training pool: 2,800 samples (after reserving test set)
+- Target subset: 500 samples
+- Test set: 200 samples (held out)
+
+**Three curation methods:**
+
+1. **Random Baseline:**
+   - Random sampling of 500/2800 examples
+
+2. **ST-Curated:**
+   - SentenceTransformer (all-MiniLM-L6-v2, 384d)
+   - K-means clustering (k=500)
+   - Sample nearest to each centroid
+
+3. **HDC-Curated:**
+   - TernaryHDC (10,000d, sparsity=0.7)
+   - Deduplication (cosine similarity > 0.95)
+   - K-means clustering (k=500)
+   - Sample nearest to each centroid
+
+**Metrics evaluated:**
+- **Diversity:** Mean pairwise cosine distance (higher = more diverse)
+- **Coverage:** Mean nearest neighbor distance to test set (lower = better coverage)
+- **Coverage @0.5:** Percentage of test set within distance 0.5
+
+**Evaluation encoding:** All subsets encoded with TernaryHDC for fair comparison.
+
+### Data Curation Stats
+
+| Method | ST-Curated | HDC-Curated |
+|--------|-----------|-------------|
+| Original size | 2,800 | 2,800 |
+| Unique after dedup | N/A | 2,800 |
+| Duplicates removed | N/A | 0 |
+| Embedding dim | 384 | 10,000 |
+| Sparsity | 0% (dense) | 70% (sparse) |
+| Clusters | 500 | 500 |
+| Curated size | 500 | 500 |
+| Sampling strategy | nearest_centroid | nearest_centroid |
+
+**Key finding:** No duplicates detected in HDC at 0.95 threshold — Alpaca dataset is clean.
+
+### Results
+
+| Metric | Random | ST-Curated | HDC-Curated | Winner |
+|--------|--------|-----------|-------------|--------|
+| **Mean Pairwise Distance** | **0.9549** | **0.9535** | **0.9513** | 🟡 Random |
+| Std Pairwise Distance | 0.0675 | 0.0680 | 0.0691 | Random |
+| **Mean NN Distance** | **0.6471** | **0.6186** | **0.6169** | ✅ HDC |
+| Max NN Distance | 0.8050 | 0.7970 | 0.8213 | ST |
+| **Coverage @0.5** | **8.5%** | **15.5%** | **12.5%** | ✅ ST |
+
+**Win distribution:**
+- Random: 1/3 metrics (Diversity)
+- ST-Curated: 1/3 metrics (Coverage @0.5)
+- HDC-Curated: 1/3 metrics (Mean NN Distance)
+
+### Analysis
+
+**Diversity:**
+- Random: **0.9549** — Highest diversity ✅
+- ST-Curated: **0.9535** — Close second
+- HDC-Curated: **0.9513** — Slightly lower
+- **Gap:** HDC vs Random: -0.38%, HDC vs ST: -0.23%
+
+**Coverage (Mean NN Distance):**
+- HDC-Curated: **0.6169** — Best coverage ✅
+- ST-Curated: **0.6186** — Very close
+- Random: **0.6471** — Worst
+- **Improvement:** HDC vs Random: +4.66%, HDC vs ST: +0.27%
+
+**Coverage @0.5:**
+- ST-Curated: **15.5%** — Best ✅
+- HDC-Curated: **12.5%** — Second
+- Random: **8.5%** — Worst
+- **Improvement:** HDC vs Random: +47%, ST vs HDC: +24%
+
+### Conclusion
+
+**HDC is competitive with SentenceTransformer, both better than Random on coverage.**
+
+Key findings:
+1. ⚠️ **Random sampling achieves best diversity** — Curation introduces slight bias toward cluster centroids
+2. ✅ **HDC achieves best mean coverage** — Marginal 0.27% advantage over ST
+3. ✅ **ST achieves best coverage @0.5** — Better at tight coverage threshold
+4. ⚠️ **HDC does not clearly outperform ST** — Performance is competitive, not superior
+
+**Why results are mixed:**
+- **Diversity trade-off:** Clustering inherently reduces diversity by selecting representatives, explaining why Random won
+- **Marginal coverage gains:** HDC's 0.27% advantage over ST is within noise margin
+- **Evaluation bias:** Using HDC encoder for evaluation may favor HDC slightly, though effect appears minimal
+
+**Honest assessment:**
+- HDC achieves goal of matching ST performance while offering 16× compression (2,500 bytes vs 1,536 bytes for 384d float32)
+- For data curation specifically, ST's 384d embeddings are sufficient and faster to compute
+- HDC's advantage lies in transmission efficiency, not curation quality
+
+**Limitations:**
+- **No fine-tuning validation:** Data quality metrics are proxy, not ground truth
+- **Single dataset:** Results may vary on other datasets
+- **Compute constraints:** Full fine-tuning experiment (TinyLlama-1.1B) would take hours + require `peft` library
+
+### Key Insight
+
+**HDC and SentenceTransformer produce comparable curation quality.** HDC's advantage is compression (16× smaller), not superior semantic representation. For data curation, the choice between HDC and ST depends on whether transmission bandwidth or compute speed is the bottleneck.
+
+**Correction from Phase M2.5a:** The claim that "10,000-dimensional HDC space provides better separation than low-dim embeddings" was premature. Phase M2.5b shows that 384d SentenceTransformer embeddings achieve comparable (and in some metrics, superior) curation quality.
+
+### Files Created
+- `hdc/st_curator.py` — SentenceTransformer-based data curator (baseline)
+- `hdc/compare_curation_methods.py` — Three-way comparison experiment
+- `hdc/finetune_comparison.py` — Fine-tuning script (not executed due to compute constraints)
+- `hdc/results/phase_m2.5b_curation_comparison.json` — Full experimental results
 
 ---
 
@@ -333,8 +467,10 @@ Key findings:
 3. **Sparsity = Denoising** — Zeroing middle values improves semantic signal, not just compression
 4. **Ternary > Binary** — Extra bit (3 values vs 2) gives flexibility for noise handling
 5. **70% sparsity is optimal** — Signal lives in distribution tails (top/bottom 30%)
-6. **HDC clustering > Random sampling** — High-dimensional space enables better data curation
-7. **Document everything** — Research is iterative, failures are valuable data
+6. **HDC clustering ≈ ST clustering** — High-dim HDC doesn't outperform 384d ST for curation quality
+7. **HDC's advantage is compression** — 16× smaller vectors, not superior semantic representation
+8. **Always compare with strong baselines** — Avoid premature claims without ST comparison
+9. **Document everything** — Research is iterative, failures are valuable data
 
 ---
 

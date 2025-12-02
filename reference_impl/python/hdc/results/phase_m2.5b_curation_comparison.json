@@ -1,0 +1,110 @@
+{
+  "phase": "M2.5b",
+  "date": "2025-12-02 20:40:18",
+  "note": "Data quality metrics comparison (fine-tuning would require hours)",
+  "config": {
+    "full_dataset_size": 3000,
+    "subset_size": 500,
+    "test_size": 200
+  },
+  "curation_stats": {
+    "st": {
+      "method": "ST-Curated",
+      "model": "all-MiniLM-L6-v2",
+      "embed_dim": 384,
+      "n_clusters": 500,
+      "curated_size": 500,
+      "sampling_strategy": "nearest_centroid",
+      "inertia": 1329.78125,
+      "original_size": 2800
+    },
+    "hdc": {
+      "original_size": 2800,
+      "unique_after_dedup": 2800,
+      "duplicates_removed": 0,
+      "duplicate_groups": 0,
+      "avg_duplicate_group_size": 0,
+      "n_clusters": 500,
+      "curated_size": 500,
+      "sampling_strategy": "nearest_centroid",
+      "dedup_threshold": 0.95,
+      "sparsity": 0.7
+    }
+  },
+  "results": {
+    "random": {
+      "diversity": {
+        "mean_distance": 0.9548820853233337,
+        "std_distance": 0.06754197180271149,
+        "min_distance": 0.3029998540878296,
+        "max_distance": 1.1643333435058594,
+        "median_distance": 0.9636666774749756
+      },
+      "coverage": {
+        "mean_nn_distance": 0.6470533013343811,
+        "max_nn_distance": 0.8050000071525574,
+        "median_nn_distance": 0.6608332991600037,
+        "coverage_at_01": 0.0,
+        "coverage_at_02": 0.0,
+        "coverage_at_05": 0.085
+      }
+    },
+    "st_curated": {
+      "diversity": {
+        "mean_distance": 0.9534640312194824,
+        "std_distance": 0.06798607856035233,
+        "min_distance": 0.41533327102661133,
+        "max_distance": 1.1723333597183228,
+        "median_distance": 0.9629999995231628
+      },
+      "coverage": {
+        "mean_nn_distance": 0.6185616254806519,
+        "max_nn_distance": 0.796999990940094,
+        "median_nn_distance": 0.638166606426239,
+        "coverage_at_01": 0.0,
+        "coverage_at_02": 0.0,
+        "coverage_at_05": 0.155
+      }
+    },
+    "hdc_curated": {
+      "diversity": {
+        "mean_distance": 0.9512529373168945,
+        "std_distance": 0.06905122846364975,
+        "min_distance": 0.41133320331573486,
+        "max_distance": 1.159999966621399,
+        "median_distance": 0.9616666436195374
+      },
+      "coverage": {
+        "mean_nn_distance": 0.6168932914733887,
+        "max_nn_distance": 0.8213333487510681,
+        "median_nn_distance": 0.6289999485015869,
+        "coverage_at_01": 0.0,
+        "coverage_at_02": 0.0,
+        "coverage_at_05": 0.125
+      }
+    }
+  },
+  "comparison": {
+    "status": "\u26a0\ufe0f  PARTIAL SUCCESS",
+    "message": "HDC competitive with ST, both better than Random",
+    "wins": {
+      "Random": 1,
+      "ST-Curated": 1,
+      "HDC-Curated": 1
+    },
+    "diversity_winner": "Random",
+    "coverage_winner": "HDC-Curated",
+    "improvements": {
+      "diversity": {
+        "hdc_vs_random_pct": -0.3800624246930278,
+        "hdc_vs_st_pct": -0.23190113420009112,
+        "st_vs_random_pct": -0.14850567684188454
+      },
+      "coverage": {
+        "hdc_vs_random_pct": 4.661132212569685,
+        "hdc_vs_st_pct": 0.2697118506125899,
+        "st_vs_random_pct": 4.403296574636508
+      }
+    }
+  }
+}
