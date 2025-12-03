@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
+import Head from '@docusaurus/Head';
 
 export default function Demo() {
   const [activeDemo, setActiveDemo] = useState('compression');
   const [compressionProgress, setCompressionProgress] = useState(0);
   const [transferProgress, setTransferProgress] = useState(0);
   const [generalizationProgress, setGeneralizationProgress] = useState(0);
+
+  // Setup Tailwind CSS
+  useEffect(() => {
+    if (!document.getElementById('tailwind-script')) {
+      const script = document.createElement('script');
+      script.id = 'tailwind-script';
+      script.src = "https://cdn.tailwindcss.com";
+      document.head.appendChild(script);
+    }
+  }, []);
 
   // Simulate compression demo
   useEffect(() => {
