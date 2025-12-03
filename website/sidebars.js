@@ -22,7 +22,7 @@ const sidebars = {
       label: 'Research: Experimental Validation',
       collapsed: false,
       items: [
-        'research/overview',
+        'research/research-overview',
         {
           type: 'category',
           label: 'M2.5 Series: Data Efficiency',
