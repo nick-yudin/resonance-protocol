@@ -683,9 +683,94 @@ Key findings:
 
 ---
 
+## Phase M2.5′: HDC Semantic Header (❌ FAILURE)
+
+**Date:** 2024-12-03
+
+**Status:** ❌ FAILURE
+
+### Goal
+Test if HDC vector can improve inference when prepended as pseudo-tokens to model input.
+
+### Hypothesis
+HDC semantic header provides context that helps model understand intent, acting as learned prompt prefix.
+
+### Method
+
+**Model:** OPT-350m (hidden_size=512)
+
+**Dataset:** SST-2 sentiment classification
+- Training: 2,000 samples
+- Validation: 500 samples
+
+**Architecture:**
+1. Encode text with TernaryHDC (10,000d, sparsity=0.7)
+2. Project HDC → MLP → k pseudo-tokens (each 512d)
+3. Prepend pseudo-tokens to input embeddings
+4. Standard classification head
+
+**Configurations tested:**
+- Baseline: No header (direct text → OPT → classifier)
+- HDC Header k=2: 2 pseudo-tokens prepended
+- HDC Header k=4: 4 pseudo-tokens prepended
+- HDC Header k=8: 8 pseudo-tokens prepended
+
+**Training:** 10 epochs, batch=16, lr=2e-5
+
+### Results
+
+| Config | Val Accuracy | vs Baseline | Parameters |
+|--------|--------------|-------------|------------|
+| **Baseline** | **84.8%** | — | **132K** |
+| HDC Header (k=8) | 77.6% | -8.5% | 29M |
+| HDC Header (k=4) | 76.0% | -10.4% | 25M |
+| HDC Header (k=2) | 69.2% | -18.4% | 23M |
+
+**Parameter breakdown:**
+- Baseline: Simple classification head (512 → 2)
+- HDC Header: MLP projection (10,000 → k×512) + classification head
+  - k=2: 23M params (projection dominates)
+  - k=4: 25M params
+  - k=8: 29M params
+
+### Key Insights
+
+1. **HDC header adds massive parameters** — 22-29M vs 132K baseline (175-220× increase)
+2. **Performance degrades significantly** — All configurations worse than baseline (-8.5% to -18.4%)
+3. **More tokens = worse performance** — k=2 worst (-18.4%), k=8 best but still poor (-8.5%)
+4. **Pseudo-tokens act as noise** — Model not trained to use such prefixes
+5. **Parameter inefficiency** — Projection layer (10,000 → k×512) dominates parameter count
+
+### Analysis
+
+**Why it failed:**
+- **Untrained modality:** OPT-350m never trained with prefixed pseudo-tokens
+- **Semantic disconnect:** HDC vector doesn't map naturally to token space
+- **Overfitting:** Massive projection layer (10-29M params) on small dataset (2K samples)
+- **Gradient flow:** Pseudo-tokens may interfere with backpropagation to real tokens
+
+**Better alternatives:**
+- Adapter layers (few hundred K params)
+- Learned soft prompts (few K params)
+- Prefix tuning (lightweight prefix)
+
+### Conclusion
+
+**❌ FAILURE — HDC Semantic Header does not work for runtime injection.**
+
+HDC vectors are effective for **data curation** (selecting training examples) but ineffective for **runtime injection** (prepending to model input). The architectural mismatch between HDC space and token embedding space cannot be bridged efficiently.
+
+**Key lesson:** HDC's strength is in data selection and curriculum learning, not as input augmentation for pretrained models.
+
+### Files Created
+- `hdc/results/phase_m2.5prime_semantic_header.json` — Full experimental results
+- Training logs and checkpoints (discarded due to failure)
+
+---
+
 ## M2.5 Series Summary
 
-**Goal:** Validate HDC-based data curation for LLM fine-tuning
+**Goal:** Validate HDC-based data curation for LLM fine-tuning and explore runtime injection
 
 | Phase | Experiment | Result | Key Finding |
 |-------|------------|--------|-------------|
@@ -694,15 +779,18 @@ Key findings:
 | M2.5c | Fine-tuning comparison | ✅ SUCCESS | HDC > ST > Random (1.2194 loss, +2.6% vs ST) |
 | M2.5d | Sampling strategies | ⚠️ MIXED | Exploration of boundary/centroid/mixed sampling |
 | M2.5e | Curriculum optimization | ✅✅ SUCCESS | **Sharp curriculum: 1.1206 loss (+8.1% vs M2.5c)** |
+| M2.5′ | Semantic Header | ❌ FAILURE | Runtime injection doesn't work (-8.5% accuracy) |
 
-**Overall result:** ✅✅ **STRONG SUCCESS**
+**Overall result:** ✅✅ **STRONG SUCCESS (data curation), ❌ FAILURE (runtime injection)**
 
-**Final performance:**
+**Final performance (data curation):**
 - Random baseline: 1.2541 loss
 - HDC-curated: 1.2194 loss (+2.77% vs Random)
 - **HDC + curriculum: 1.1206 loss (+10.7% vs Random, +8.1% vs HDC-curated)**
 
-**M2.5 COMPLETE** — HDC-guided curriculum learning validated as core technology for Resonance Protocol.
+**Main finding:** HDC works for **data curation and curriculum learning**, not for **runtime injection** as pseudo-tokens.
+
+**M2.5 COMPLETE** — HDC-guided curriculum learning validated as core technology for Resonance Protocol. HDC semantic header approach abandoned.
 
 ---
 
@@ -720,7 +808,9 @@ Key findings:
 10. **HDC clusters encode difficulty** — Distance from centroid correlates with learning difficulty
 11. **Curriculum learning amplifies HDC gains** — Sharp easy→hard transitions improve results by 8.1%
 12. **Constant LR for curriculum** — LR decay hurts curriculum learning by limiting adaptation to hard examples
-13. **Document everything** — Research is iterative, failures are valuable data
+13. **HDC for data, not runtime** — HDC excels at data selection/curation but fails as runtime input augmentation
+14. **Architectural mismatch matters** — Injecting HDC as pseudo-tokens creates parameter explosion without benefit
+15. **Document everything** — Research is iterative, failures are valuable data
 
 ---
 
