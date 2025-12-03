@@ -464,11 +464,11 @@ export default function Demo() {
                         <span>red square ✓</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">🔵🔺</span>
+                        <span className="text-2xl">🔺</span>
                         <span>blue triangle ✓</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">🟡🔵</span>
+                        <span className="text-2xl">🟡</span>
                         <span>yellow circle ✓</span>
                       </div>
                     </div>
