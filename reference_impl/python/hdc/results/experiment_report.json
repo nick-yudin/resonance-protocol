@@ -1,0 +1,50 @@
+{
+  "experiment": "Compositional Generalization Test",
+  "start_time": "2025-12-03T00:22:34.800133",
+  "status": "COMPLETED",
+  "current_step": "Create Visualization",
+  "steps_completed": [
+    "Environment Check",
+    "Install Dependencies",
+    "Imports",
+    "Create Language",
+    "Create Splits",
+    "Create HDC Model",
+    "Test HDC Model",
+    "Create Vocabulary & Dataset",
+    "Create Transformer Model",
+    "Train Transformer",
+    "Test Transformer",
+    "Final Comparison",
+    "Create Visualization"
+  ],
+  "errors": [],
+  "results": {
+    "device": "cuda",
+    "total_examples": 35,
+    "train_size": 16,
+    "test_size": 19,
+    "hdc_accuracy": 1.0,
+    "hdc_correct": 19,
+    "hdc_total": 19,
+    "transformer_params": 932617,
+    "transformer_final_loss": 0.002822070848196745,
+    "transformer_accuracy": 0.0,
+    "transformer_correct": 0,
+    "transformer_total": 19,
+    "hypothesis_supported": true,
+    "accuracy_difference": 1.0
+  },
+  "environment": {
+    "python_version": "3.12.12",
+    "platform": "Linux-6.6.105+-x86_64-with-glibc2.35",
+    "torch_version": "2.9.0+cu126",
+    "cuda_available": true,
+    "gpu_name": "Tesla T4",
+    "gpu_memory_gb": 15.828320256
+  },
+  "debug_info": [],
+  "last_updated": "2025-12-03T00:22:52.714374",
+  "duration_seconds": 17.91425,
+  "end_time": "2025-12-03T00:22:52.712505"
+}

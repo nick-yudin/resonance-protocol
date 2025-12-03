@@ -1,0 +1,342 @@
+[00:56:26] [INFO] ======================================================================
+[00:56:26] [INFO] LARGE-SCALE COMPOSITIONAL GENERALIZATION EXPERIMENT
+[00:56:26] [INFO] Started: 2025-12-03 00:56:26.604756
+[00:56:26] [INFO] ======================================================================
+[00:56:26] [INFO] 
+==================================================
+[00:56:26] [INFO] STEP: Setup Environment
+[00:56:26] [INFO] ==================================================
+[00:56:32] [INFO]   python: 3.12.12
+[00:56:32] [INFO]   torch: 2.9.0+cu126
+[00:56:32] [INFO]   cuda: True
+[00:56:32] [INFO]   device: cuda
+[00:56:32] [INFO]   gpu: Tesla T4
+[00:56:32] [INFO]   gpu_memory_gb: 15.83
+[00:56:32] [INFO] ✓ Completed: Setup Environment
+[00:56:32] [INFO] 
+==================================================
+[00:56:32] [INFO] STEP: Create Language
+[00:56:32] [INFO] ==================================================
+[00:56:32] [INFO] Level 1: 12 examples
+[00:56:32] [INFO]     'walk' → 'WALK'
+[00:56:32] [INFO]     'run' → 'RUN'
+[00:56:32] [INFO] Level 2: 48 examples
+[00:56:32] [INFO]     'walk twice' → 'WALK WALK'
+[00:56:32] [INFO]     'walk thrice' → 'WALK WALK WALK'
+[00:56:32] [INFO] Level 3: 144 examples
+[00:56:32] [INFO]     'walk and walk' → 'WALK WALK'
+[00:56:32] [INFO]     'walk and run' → 'WALK RUN'
+[00:56:32] [INFO] Level 4: 576 examples
+[00:56:32] [INFO]     'walk twice and walk' → 'WALK WALK WALK'
+[00:56:32] [INFO]     'walk twice and run' → 'WALK WALK RUN'
+[00:56:32] [INFO] Level 5: 2304 examples
+[00:56:32] [INFO]     'walk twice and walk twice' → 'WALK WALK WALK WALK'
+[00:56:32] [INFO]     'walk twice and walk thrice' → 'WALK WALK WALK WALK WALK'
+[00:56:32] [INFO] 
+Total examples: 3084
+[00:56:32] [INFO] RESULT: total_possible_examples = 3084
+[00:56:32] [INFO] ✓ Completed: Create Language
+[00:56:32] [INFO] 
+==================================================
+[00:56:32] [INFO] STEP: Create Train/Test Splits
+[00:56:32] [INFO] ==================================================
+[00:56:32] [INFO] Level 1: Train=11, Interp=1, Extrap=0
+[00:56:32] [INFO] Level 2: Train=15, Interp=3, Extrap=30
+[00:56:32] [INFO] Level 3: Train=65, Interp=16, Extrap=63
+[00:56:32] [INFO] Level 4: Train=123, Interp=39, Extrap=414
+[00:56:32] [INFO] Level 5: Train=258, Interp=66, Extrap=1980
+[00:56:32] [INFO] 
+TOTAL: Train=472, Interp=125, Extrap=2487
+[00:56:32] [INFO] RESULT: total_train = 472
+[00:56:32] [INFO] RESULT: total_test_interpolation = 125
+[00:56:32] [INFO] RESULT: total_test_extrapolation = 2487
+[00:56:32] [INFO] ✓ Completed: Create Train/Test Splits
+[00:56:32] [INFO] 
+==================================================
+[00:56:32] [INFO] STEP: Create HDC Model
+[00:56:32] [INFO] ==================================================
+[00:56:32] [INFO] HDC Model class created
+[00:56:32] [INFO] ✓ Completed: Create HDC Model
+[00:56:33] [INFO] 
+==================================================
+[00:56:33] [INFO] STEP: Create Data Infrastructure
+[00:56:33] [INFO] ==================================================
+[00:56:33] [INFO] Source vocabulary: 22 words
+[00:56:33] [INFO] Target vocabulary: 16 words
+[00:56:33] [INFO] ✓ Completed: Create Data Infrastructure
+[00:56:33] [INFO] 
+==================================================
+[00:56:33] [INFO] STEP: Create Transformer Class
+[00:56:33] [INFO] ==================================================
+[00:56:33] [INFO] Transformer class created
+[00:56:33] [INFO] ✓ Completed: Create Transformer Class
+[00:56:33] [INFO] small: 673,808 parameters
+[00:56:33] [INFO] medium: 5,294,096 parameters
+[00:56:33] [INFO] large: 31,588,368 parameters
+[00:56:33] [INFO] Training and evaluation functions ready
+[00:56:33] [INFO] 
+==================================================
+[00:56:33] [INFO] STEP: Main Experiment
+[00:56:33] [INFO] ==================================================
+[00:56:33] [INFO] 
+############################################################
+[00:56:33] [INFO] LEVEL 1
+[00:56:33] [INFO] ############################################################
+[00:56:33] [INFO] Train=11, Interp=1, Extrap=0
+[00:56:33] [INFO] 
+--- HDC ---
+[00:56:33] [INFO] HDC: Train=100.0%, Interp=100.0%, Extrap=N/A
+[00:56:33] [INFO] 
+Cumulative training: 11 examples
+[00:56:33] [INFO] 
+--- Transformer (small) ---
+[00:56:34] [INFO] Params=673,808, Epochs=100
+[00:56:42] [INFO] Final loss: 0.0003
+[00:56:42] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=N/A
+[00:56:42] [INFO] 
+--- Transformer (medium) ---
+[00:56:42] [INFO] Params=5,294,096, Epochs=100
+[00:56:45] [INFO] Final loss: 0.0000
+[00:56:45] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=N/A
+[00:56:45] [INFO] 
+--- Transformer (large) ---
+[00:56:46] [INFO] Params=31,588,368, Epochs=100
+[00:56:51] [INFO] Final loss: 0.0000
+[00:56:51] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=N/A
+[00:56:51] [INFO] 
+############################################################
+[00:56:51] [INFO] LEVEL 2
+[00:56:51] [INFO] ############################################################
+[00:56:51] [INFO] Train=15, Interp=3, Extrap=30
+[00:56:51] [INFO] 
+--- HDC ---
+[00:56:51] [INFO] HDC: Train=100.0%, Interp=100.0%, Extrap=100.0%
+[00:56:51] [INFO] 
+Cumulative training: 26 examples
+[00:56:51] [INFO] 
+--- Transformer (small) ---
+[00:56:51] [INFO] Params=673,808, Epochs=76
+[00:56:53] [INFO] Final loss: 0.0045
+[00:56:53] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:56:53] [INFO] Sample errors:
+[00:56:53] [INFO]   'walk four times' → 'WALK WALK' (expected: 'WALK WALK WALK WALK')
+[00:56:53] [INFO]   'walk five times' → 'WALK WALK' (expected: 'WALK WALK WALK WALK WALK')
+[00:56:53] [INFO]   'run four times' → 'RUN' (expected: 'RUN RUN RUN RUN')
+[00:56:53] [INFO] 
+--- Transformer (medium) ---
+[00:56:53] [INFO] Params=5,294,096, Epochs=76
+[00:56:56] [INFO] Final loss: 0.0060
+[00:56:57] [INFO] Results: Train=6.7%, Interp=0.0%, Extrap=0.0%
+[00:56:57] [INFO] Sample errors:
+[00:56:57] [INFO]   'walk four times' → 'WALK' (expected: 'WALK WALK WALK WALK')
+[00:56:57] [INFO]   'walk five times' → 'WALK' (expected: 'WALK WALK WALK WALK WALK')
+[00:56:57] [INFO]   'run four times' → 'RUN' (expected: 'RUN RUN RUN RUN')
+[00:56:57] [INFO] 
+--- Transformer (large) ---
+[00:56:58] [INFO] Params=31,588,368, Epochs=76
+[00:57:03] [INFO] Final loss: 1.6463
+[00:57:04] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:57:04] [INFO] Sample errors:
+[00:57:04] [INFO]   'walk four times' → '' (expected: 'WALK WALK WALK WALK')
+[00:57:04] [INFO]   'walk five times' → '' (expected: 'WALK WALK WALK WALK WALK')
+[00:57:04] [INFO]   'run four times' → '' (expected: 'RUN RUN RUN RUN')
+[00:57:04] [INFO] 
+############################################################
+[00:57:04] [INFO] LEVEL 3
+[00:57:04] [INFO] ############################################################
+[00:57:04] [INFO] Train=65, Interp=16, Extrap=63
+[00:57:04] [INFO] 
+--- HDC ---
+[00:57:04] [INFO] HDC: Train=100.0%, Interp=100.0%, Extrap=100.0%
+[00:57:04] [INFO] 
+Cumulative training: 91 examples
+[00:57:04] [INFO] 
+--- Transformer (small) ---
+[00:57:04] [INFO] Params=673,808, Epochs=30
+[00:57:05] [INFO] Final loss: 0.0089
+[00:57:07] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:57:07] [INFO] Sample errors:
+[00:57:07] [INFO]   'walk and swim' → 'WALK' (expected: 'WALK SWIM')
+[00:57:07] [INFO]   'walk and fly' → 'WALK' (expected: 'WALK FLY')
+[00:57:07] [INFO]   'walk and climb' → 'WALK' (expected: 'WALK CLIMB')
+[00:57:07] [INFO] 
+--- Transformer (medium) ---
+[00:57:07] [INFO] Params=5,294,096, Epochs=30
+[00:57:09] [INFO] Final loss: 0.0666
+[00:57:11] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:57:12] [INFO] Sample errors:
+[00:57:12] [INFO]   'walk and swim' → 'CRAWL' (expected: 'WALK SWIM')
+[00:57:12] [INFO]   'walk and fly' → 'CRAWL' (expected: 'WALK FLY')
+[00:57:12] [INFO]   'walk and climb' → 'CRAWL' (expected: 'WALK CLIMB')
+[00:57:12] [INFO] 
+--- Transformer (large) ---
+[00:57:12] [INFO] Params=31,588,368, Epochs=30
+[00:57:20] [INFO] Final loss: 1.7822
+[00:57:22] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:57:22] [INFO] Sample errors:
+[00:57:22] [INFO]   'walk and swim' → '' (expected: 'WALK SWIM')
+[00:57:22] [INFO]   'walk and fly' → '' (expected: 'WALK FLY')
+[00:57:22] [INFO]   'walk and climb' → '' (expected: 'WALK CLIMB')
+[00:57:22] [INFO] 
+############################################################
+[00:57:22] [INFO] LEVEL 4
+[00:57:22] [INFO] ############################################################
+[00:57:22] [INFO] Train=123, Interp=39, Extrap=414
+[00:57:22] [INFO] 
+--- HDC ---
+[00:57:22] [INFO] HDC: Train=100.0%, Interp=100.0%, Extrap=100.0%
+[00:57:22] [INFO] 
+Cumulative training: 214 examples
+[00:57:22] [INFO] 
+--- Transformer (small) ---
+[00:57:22] [INFO] Params=673,808, Epochs=30
+[00:57:26] [INFO] Final loss: 0.0016
+[00:57:32] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:57:32] [INFO] Sample errors:
+[00:57:32] [INFO]   'walk twice and swim' → 'WALK WALK' (expected: 'WALK WALK SWIM')
+[00:57:32] [INFO]   'walk twice and fly' → 'WALK WALK' (expected: 'WALK WALK FLY')
+[00:57:32] [INFO]   'walk twice and climb' → 'WALK WALK' (expected: 'WALK WALK CLIMB')
+[00:57:32] [INFO] 
+--- Transformer (medium) ---
+[00:57:32] [INFO] Params=5,294,096, Epochs=30
+[00:57:39] [INFO] Final loss: 0.6695
+[00:57:50] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:57:50] [INFO] Sample errors:
+[00:57:50] [INFO]   'walk twice and swim' → 'WALK WALK' (expected: 'WALK WALK SWIM')
+[00:57:50] [INFO]   'walk twice and fly' → 'WALK WALK' (expected: 'WALK WALK FLY')
+[00:57:50] [INFO]   'walk twice and climb' → 'WALK WALK' (expected: 'WALK WALK CLIMB')
+[00:57:50] [INFO] 
+--- Transformer (large) ---
+[00:57:50] [INFO] Params=31,588,368, Epochs=30
+[00:58:07] [INFO] Final loss: 2.0950
+[00:58:13] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:58:13] [INFO] Sample errors:
+[00:58:13] [INFO]   'walk twice and swim' → '' (expected: 'WALK WALK SWIM')
+[00:58:13] [INFO]   'walk twice and fly' → '' (expected: 'WALK WALK FLY')
+[00:58:13] [INFO]   'walk twice and climb' → '' (expected: 'WALK WALK CLIMB')
+[00:58:14] [INFO] 
+############################################################
+[00:58:14] [INFO] LEVEL 5
+[00:58:14] [INFO] ############################################################
+[00:58:14] [INFO] Train=258, Interp=66, Extrap=1980
+[00:58:14] [INFO] 
+--- HDC ---
+[00:58:14] [INFO] HDC: Train=100.0%, Interp=100.0%, Extrap=100.0%
+[00:58:14] [INFO] 
+Cumulative training: 472 examples
+[00:58:14] [INFO] 
+--- Transformer (small) ---
+[00:58:14] [INFO] Params=673,808, Epochs=30
+[00:58:21] [INFO] Final loss: 0.0018
+[00:58:52] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[00:58:52] [INFO] Sample errors:
+[00:58:52] [INFO]   'walk twice and walk four times' → 'WALK WALK' (expected: 'WALK WALK WALK WALK WALK WALK')
+[00:58:52] [INFO]   'walk twice and walk five times' → 'WALK WALK' (expected: 'WALK WALK WALK WALK WALK WALK WALK')
+[00:58:52] [INFO]   'walk twice and run four times' → 'WALK RUN' (expected: 'WALK WALK RUN RUN RUN RUN')
+[00:58:52] [INFO] 
+--- Transformer (medium) ---
+[00:58:52] [INFO] Params=5,294,096, Epochs=30
+[00:59:06] [INFO] Final loss: 0.8918
+[01:00:19] [INFO] Results: Train=2.0%, Interp=1.5%, Extrap=0.0%
+[01:00:19] [INFO] Sample errors:
+[01:00:19] [INFO]   'walk twice and walk four times' → 'WALK WALK WALK WALK' (expected: 'WALK WALK WALK WALK WALK WALK')
+[01:00:19] [INFO]   'walk twice and walk five times' → 'WALK WALK WALK WALK' (expected: 'WALK WALK WALK WALK WALK WALK WALK')
+[01:00:19] [INFO]   'walk twice and run four times' → 'WALK WALK WALK WALK' (expected: 'WALK WALK RUN RUN RUN RUN')
+[01:00:19] [INFO] 
+--- Transformer (large) ---
+[01:00:20] [INFO] Params=31,588,368, Epochs=30
+[01:00:57] [INFO] Final loss: 2.2269
+[01:01:20] [INFO] Results: Train=0.0%, Interp=0.0%, Extrap=0.0%
+[01:01:20] [INFO] Sample errors:
+[01:01:20] [INFO]   'walk twice and walk four times' → '' (expected: 'WALK WALK WALK WALK WALK WALK')
+[01:01:20] [INFO]   'walk twice and walk five times' → '' (expected: 'WALK WALK WALK WALK WALK WALK WALK')
+[01:01:20] [INFO]   'walk twice and run four times' → '' (expected: 'WALK WALK RUN RUN RUN RUN')
+[01:01:20] [INFO] ✓ Completed: Main Experiment
+[01:01:20] [INFO] 
+==================================================
+[01:01:20] [INFO] STEP: Print Summary
+[01:01:20] [INFO] ==================================================
+[01:01:20] [INFO] 
+======================================================================
+[01:01:20] [INFO] RESULTS SUMMARY
+[01:01:20] [INFO] ======================================================================
+[01:01:20] [INFO] 
+Level   Metric      HDC         T-small     T-medium    T-large     
+[01:01:20] [INFO] --------------------------------------------------------------------
+[01:01:20] [INFO] 1       train       100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO]         interp      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO]         extrap      N/A         N/A         N/A         N/A         
+[01:01:20] [INFO] --------------------------------------------------------------------
+[01:01:20] [INFO] 2       train       100.0%      0.0%        6.7%        0.0%        
+[01:01:20] [INFO]         interp      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO]         extrap      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO] --------------------------------------------------------------------
+[01:01:20] [INFO] 3       train       100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO]         interp      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO]         extrap      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO] --------------------------------------------------------------------
+[01:01:20] [INFO] 4       train       100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO]         interp      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO]         extrap      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO] --------------------------------------------------------------------
+[01:01:20] [INFO] 5       train       100.0%      0.0%        2.0%        0.0%        
+[01:01:20] [INFO]         interp      100.0%      0.0%        1.5%        0.0%        
+[01:01:20] [INFO]         extrap      100.0%      0.0%        0.0%        0.0%        
+[01:01:20] [INFO] --------------------------------------------------------------------
+[01:01:20] [INFO] 
+AVERAGE EXTRAPOLATION ACCURACY:
+[01:01:20] [INFO]   HDC: 100.0% (±0.0%)
+[01:01:20] [INFO]   Trans_small: 0.0% (±0.0%)
+[01:01:20] [INFO]   Trans_medium: 0.0% (±0.0%)
+[01:01:20] [INFO]   Trans_large: 0.0% (±0.0%)
+[01:01:20] [INFO] ✓ Completed: Print Summary
+[01:01:21] [INFO] 
+==================================================
+[01:01:21] [INFO] STEP: Create Visualizations
+[01:01:21] [INFO] ==================================================
+[01:01:22] [INFO] 📊 Saved: large_scale_results.png
+[01:01:22] [INFO] ✓ Completed: Create Visualizations
+[01:01:22] [INFO] 
+==================================================
+[01:01:22] [INFO] STEP: Key Findings
+[01:01:22] [INFO] ==================================================
+[01:01:22] [INFO] 
+======================================================================
+[01:01:22] [INFO] KEY FINDINGS
+[01:01:22] [INFO] ======================================================================
+[01:01:22] [INFO] 
+HDC average extrapolation: 100.0%
+[01:01:22] [INFO] Transformer (large) average: 0.0%
+[01:01:22] [INFO] 
+✓ HDC outperforms Transformer by 100.0%
+[01:01:22] [INFO] 
+HYPOTHESIS SUPPORTED:
+[01:01:22] [INFO] Structural composition enables better generalization
+[01:01:22] [INFO] than statistical pattern learning.
+[01:01:22] [INFO] RESULT: hypothesis_supported = True
+[01:01:22] [INFO] RESULT: hdc_avg_extrapolation = 1.0
+[01:01:22] [INFO] RESULT: transformer_avg_extrapolation = 0.0
+[01:01:22] [INFO] 
+======================================================================
+[01:01:22] [INFO] IMPLICATIONS FOR RESONANCE PROTOCOL
+[01:01:22] [INFO] ======================================================================
+[01:01:22] [INFO] 
+1. HDC's structural composition enables perfect generalization
+   to unseen combinations - critical for semantic event encoding.
+
+2. No training required for HDC - just store vectors.
+   Perfect for edge devices with limited compute.
+
+3. As complexity grows, HDC maintains accuracy while
+   transformers degrade - validates the rAI approach.
+
+4. New concepts can be added to HDC without retraining -
+   essential for adaptive distributed AI.
+
+[01:01:22] [INFO] ✓ Completed: Key Findings
+[01:01:22] [INFO] 
+======================================================================
+[01:01:22] [INFO] EXPERIMENT COMPLETED
+[01:01:22] [INFO] Duration: 295.7 seconds
+[01:01:22] [INFO] Errors: 0
+[01:01:22] [INFO] ======================================================================

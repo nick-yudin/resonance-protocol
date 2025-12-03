@@ -1,0 +1,10 @@
+{
+  "by_level": {},
+  "by_model": {
+    "HDC": [],
+    "Transformer_small": [],
+    "Transformer_medium": [],
+    "Transformer_large": []
+  },
+  "training_curves": {}
+}

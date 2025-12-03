@@ -1,0 +1,31 @@
+{
+  "phase": "M2.5d",
+  "experiment": "Cluster Sampling Strategies",
+  "hypothesis": "Different sampling strategies from HDC clusters may improve fine-tuning",
+  "previous_best": 1.2194,
+  "results": {
+    "centroid": {
+      "final_loss": 1.2655,
+      "samples": 500,
+      "vs_prev_best_pct": -3.780547810398559
+    },
+    "boundary": {
+      "final_loss": 1.2885,
+      "samples": 500,
+      "vs_prev_best_pct": -5.666721338363125
+    },
+    "mixed": {
+      "final_loss": 1.2436,
+      "samples": 500,
+      "vs_prev_best_pct": -1.984582581597507
+    },
+    "curriculum": {
+      "final_loss": 1.2633,
+      "samples": 500,
+      "vs_prev_best_pct": -3.6001312120715148
+    }
+  },
+  "winner": "mixed",
+  "winner_loss": 1.2436,
+  "improved_over_m2.5c": false
+}

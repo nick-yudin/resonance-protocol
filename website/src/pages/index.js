@@ -198,6 +198,7 @@ export default function Home() {
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
             <a href="#problem" className="hover:text-signal transition-colors">Problem</a>
+            <a href="#results" className="hover:text-signal transition-colors">Results</a>
             <a href="#status" className="hover:text-signal transition-colors">Status</a>
             <a href="#demo" className="hover:text-signal transition-colors">Demo</a>
             <a href="#join" className="hover:text-signal transition-colors">Join</a>
@@ -235,6 +236,10 @@ export default function Home() {
               Download Whitepaper (L0)
             </a>
           </div>
+
+          <p className="text-gray-500 text-sm mt-8">
+            A research project by <span className="text-white">Nikolay Yudin</span>
+          </p>
         </div>
         
         {/* Scroll Indicator */}
@@ -368,6 +373,104 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section: Proven Results */}
+      <section id="results" className="py-32 px-6 bg-silent border-t border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-sm font-mono text-signal tracking-widest uppercase mb-6 text-center">Research Results</h2>
+          <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 text-center">
+            What We've Proven (Not Promised)
+          </h3>
+          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+            Real experiments. Real numbers. Reproducible results.
+          </p>
+
+          {/* Three Main Results */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+
+            {/* Result 1: Compression */}
+            <div className="glass p-8 rounded-xl border-signal/30 hover:border-signal transition-colors group">
+              <div className="text-6xl font-bold text-signal mb-4">32×</div>
+              <h4 className="text-xl font-bold text-white mb-3">HDC Compression</h4>
+              <p className="text-gray-400 text-sm mb-4">
+                Distributed training bandwidth reduced from 17MB to 271KB per sync using ternary quantization.
+              </p>
+              <div className="text-xs font-mono text-gray-500">
+                M3b Experiment • December 2024
+              </div>
+              {/* Chart */}
+              <div className="mt-4 h-32 bg-noise/50 rounded-lg overflow-hidden border border-white/5">
+                <img src="/research/m3b_compression.png" alt="32x compression chart" className="w-full h-full object-contain opacity-80" />
+              </div>
+            </div>
+
+            {/* Result 2: Cross-Architecture Transfer */}
+            <div className="glass p-8 rounded-xl border-signal/30 hover:border-signal transition-colors group">
+              <div className="text-6xl font-bold text-signal mb-4">93%</div>
+              <h4 className="text-xl font-bold text-white mb-3">Knowledge Transfer</h4>
+              <p className="text-gray-400 text-sm mb-4">
+                Cross-architecture transfer efficiency. DistilBERT → GPT-2 via semantic examples, not weights.
+              </p>
+              <div className="text-xs font-mono text-gray-500">
+                M3c′ Experiment • December 2024
+              </div>
+              {/* Chart */}
+              <div className="mt-4 h-32 bg-noise/50 rounded-lg overflow-hidden border border-white/5">
+                <img src="/research/m3c_transfer.png" alt="93% transfer efficiency chart" className="w-full h-full object-contain opacity-80" />
+              </div>
+            </div>
+
+            {/* Result 3: Compositional Generalization */}
+            <div className="glass p-8 rounded-xl border-signal/30 hover:border-signal transition-colors group">
+              <div className="text-6xl font-bold text-white mb-4">100%</div>
+              <h4 className="text-xl font-bold text-white mb-3">HDC Generalization</h4>
+              <p className="text-gray-400 text-sm mb-4">
+                Perfect compositional generalization where Transformers achieve only 21% on unseen combinations.
+              </p>
+              <div className="text-xs font-mono text-gray-500">
+                M2.6 Experiment • December 2024
+              </div>
+              {/* Chart */}
+              <div className="mt-4 h-32 bg-noise/50 rounded-lg overflow-hidden border border-white/5">
+                <img src="/research/m26_generalization.png" alt="HDC vs Transformer generalization" className="w-full h-full object-contain opacity-80" />
+              </div>
+            </div>
+          </div>
+
+          {/* Why This Matters */}
+          <div className="glass p-10 rounded-xl border border-signal/20 bg-signal/5 mb-12">
+            <h4 className="text-lg font-mono text-signal mb-6 uppercase tracking-wider">Why This Changes Everything</h4>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div>
+                <h5 className="text-white font-bold mb-2">Heterogeneous Networks</h5>
+                <p className="text-gray-400 text-sm">
+                  Different models can share knowledge. No need for identical architectures across all nodes.
+                </p>
+              </div>
+              <div>
+                <h5 className="text-white font-bold mb-2">Edge-Viable Bandwidth</h5>
+                <p className="text-gray-400 text-sm">
+                  271KB per sync works on 3G, mesh networks, satellite links. Distributed training leaves the datacenter.
+                </p>
+              </div>
+              <div>
+                <h5 className="text-white font-bold mb-2">Structural Robustness</h5>
+                <p className="text-gray-400 text-sm">
+                  HDC provides compositional guarantees that scale-based approaches fundamentally cannot achieve.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Link to Full Research */}
+          <div className="text-center">
+            <Link to="/docs/research" className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white rounded hover:border-signal hover:text-signal transition-all">
+              View Full Research Log
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Section: Manifesto (4 Axioms) */}
       <section id="axioms" className="py-32 px-6 border-t border-white/5 bg-[#050505]">
         <div className="max-w-7xl mx-auto">
@@ -419,36 +522,36 @@ export default function Home() {
             <div className="glass p-8 rounded-xl border-green-500/20">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <h4 className="text-xl font-bold text-white">Proven</h4>
+                <h4 className="text-xl font-bold text-white">Experimentally Proven</h4>
               </div>
               <div className="space-y-6">
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-bold text-white">Semantic filtering</h5>
-                    <span className="text-xs font-mono text-green-500">WORKING</span>
+                    <h5 className="font-bold text-white">Distributed Training</h5>
+                    <span className="text-xs font-mono text-green-500">M3a ✓</span>
                   </div>
-                  <p className="text-sm text-gray-400">90%+ reduction in transmissions. <a href="https://github.com/nick-yudin/resonance-protocol/tree/main/reference_impl/python/benchmarks" className="text-signal hover:underline">See benchmark →</a></p>
+                  <p className="text-sm text-gray-400">Two nodes trained shared model via Firebase. Loss converged identically.</p>
                 </div>
                 <div className="border-t border-white/10 pt-4">
                   <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-bold text-white">Procrustes alignment</h5>
-                    <span className="text-xs font-mono text-green-500">WORKING</span>
+                    <h5 className="font-bold text-white">HDC Compression (32×)</h5>
+                    <span className="text-xs font-mono text-green-500">M3b ✓</span>
                   </div>
-                  <p className="text-sm text-gray-400">Different models understand each other. Math works.</p>
+                  <p className="text-sm text-gray-400">17MB → 271KB per sync. Ternary quantization + 2-bit packing.</p>
                 </div>
                 <div className="border-t border-white/10 pt-4">
                   <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-bold text-white">Event-driven architecture</h5>
-                    <span className="text-xs font-mono text-green-500">WORKING</span>
+                    <h5 className="font-bold text-white">Cross-Architecture Transfer (93%)</h5>
+                    <span className="text-xs font-mono text-green-500">M3c′ ✓</span>
                   </div>
-                  <p className="text-sm text-gray-400">Energy savings measured on edge devices.</p>
+                  <p className="text-sm text-gray-400">DistilBERT → GPT-2 knowledge transfer via semantic examples.</p>
                 </div>
                 <div className="border-t border-white/10 pt-4">
                   <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-bold text-white">Gossip mesh propagation</h5>
-                    <span className="text-xs font-mono text-green-500">WORKING</span>
+                    <h5 className="font-bold text-white">Compositional Generalization</h5>
+                    <span className="text-xs font-mono text-green-500">M2.6 ✓</span>
                   </div>
-                  <p className="text-sm text-gray-400">Standard protocol, battle-tested.</p>
+                  <p className="text-sm text-gray-400">HDC 100% vs Transformer 21% on unseen combinations.</p>
                 </div>
               </div>
             </div>
@@ -766,6 +869,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section: About */}
+      <section id="about" className="py-24 px-6 bg-silent border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="glass p-12 rounded-2xl">
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              {/* Photo placeholder */}
+              <div className="w-32 h-32 rounded-full bg-noise border-2 border-signal/30 flex-shrink-0 overflow-hidden flex items-center justify-center">
+                <span className="text-gray-600 text-xs font-mono">[PHOTO]</span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">Nikolay Yudin</h3>
+                <p className="text-signal font-mono text-sm mb-4">Creator of Resonance Protocol</p>
+                <p className="text-gray-400 leading-relaxed mb-4">
+                  Building the infrastructure for distributed AI that no single entity can control.
+                  Researching HDC, semantic computing, and cross-architecture knowledge transfer.
+                </p>
+                <p className="text-gray-400 leading-relaxed mb-6">
+                  Looking for collaborators who believe AI should be like air — ubiquitous, invisible, and free.
+                </p>
+                <div className="flex gap-4">
+                  <a href="mailto:1@resonanceprotocol.org" className="text-white hover:text-signal transition-colors" title="Email">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                  </a>
+                  <a href="https://twitter.com/rAI_stack" target="_blank" className="text-white hover:text-signal transition-colors" title="Twitter / X">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  <a href="https://github.com/nick-yudin" target="_blank" className="text-white hover:text-signal transition-colors" title="GitHub">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  </a>
+                  <a href="https://www.linkedin.com/in/nikolay-yudin/" target="_blank" className="text-white hover:text-signal transition-colors" title="LinkedIn">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-20 border-t border-white/10 px-6 bg-void">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -783,8 +925,13 @@ export default function Home() {
             <a href="mailto:1@resonanceprotocol.org" className="text-gray-500 hover:text-white transition-colors">Contact</a>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-xs text-gray-800 font-mono">
-          INITIATED 2025 // NIKOLAY YUDIN // SILENCE IS GOLDEN
+        <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-white/5 text-center">
+          <p className="text-gray-400 text-sm mb-2">
+            Created by <a href="#about" className="text-white hover:text-signal font-bold transition-colors">Nikolay Yudin</a>
+          </p>
+          <p className="text-xs text-gray-700 font-mono">
+            INITIATED 2025 // SILENCE IS GOLDEN
+          </p>
         </div>
       </footer>
     </div>

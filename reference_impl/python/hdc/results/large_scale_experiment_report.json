@@ -1,0 +1,197 @@
+{
+  "experiment": "Large-Scale Compositional Generalization",
+  "start_time": "2025-12-03T00:56:26.604756",
+  "status": "COMPLETED",
+  "current_step": "Key Findings",
+  "steps_completed": [
+    "Setup Environment",
+    "Create Language",
+    "Create Train/Test Splits",
+    "Create HDC Model",
+    "Create Data Infrastructure",
+    "Create Transformer Class",
+    "Main Experiment",
+    "Print Summary",
+    "Create Visualizations",
+    "Key Findings"
+  ],
+  "errors": [],
+  "results": {
+    "total_possible_examples": 3084,
+    "total_train": 472,
+    "total_test_interpolation": 125,
+    "total_test_extrapolation": 2487,
+    "hypothesis_supported": true,
+    "hdc_avg_extrapolation": 1.0,
+    "transformer_avg_extrapolation": 0.0
+  },
+  "level_results": {
+    "level_1": {
+      "all": {
+        "train_size": 11,
+        "HDC": {
+          "train": 1.0,
+          "interp": 1.0,
+          "extrap": null
+        },
+        "Trans_small": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": null,
+          "params": 673808,
+          "loss": 0.00030309223802760243
+        },
+        "Trans_medium": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": null,
+          "params": 5294096,
+          "loss": 4.111551970709115e-05
+        },
+        "Trans_large": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": null,
+          "params": 31588368,
+          "loss": 2.2216252091311617e-06
+        }
+      }
+    },
+    "level_2": {
+      "all": {
+        "train_size": 15,
+        "HDC": {
+          "train": 1.0,
+          "interp": 1.0,
+          "extrap": 1.0
+        },
+        "Trans_small": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 673808,
+          "loss": 0.004530427511781454
+        },
+        "Trans_medium": {
+          "train": 0.06666666666666667,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 5294096,
+          "loss": 0.005983773618936539
+        },
+        "Trans_large": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 31588368,
+          "loss": 1.646277904510498
+        }
+      }
+    },
+    "level_3": {
+      "all": {
+        "train_size": 65,
+        "HDC": {
+          "train": 1.0,
+          "interp": 1.0,
+          "extrap": 1.0
+        },
+        "Trans_small": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 673808,
+          "loss": 0.008880673752476772
+        },
+        "Trans_medium": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 5294096,
+          "loss": 0.066554290552934
+        },
+        "Trans_large": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 31588368,
+          "loss": 1.7822155555089314
+        }
+      }
+    },
+    "level_4": {
+      "all": {
+        "train_size": 123,
+        "HDC": {
+          "train": 1.0,
+          "interp": 1.0,
+          "extrap": 1.0
+        },
+        "Trans_small": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 673808,
+          "loss": 0.0016228482127189636
+        },
+        "Trans_medium": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 5294096,
+          "loss": 0.6694608671324593
+        },
+        "Trans_large": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 31588368,
+          "loss": 2.094983066831316
+        }
+      }
+    },
+    "level_5": {
+      "all": {
+        "train_size": 258,
+        "HDC": {
+          "train": 1.0,
+          "interp": 1.0,
+          "extrap": 1.0
+        },
+        "Trans_small": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 673808,
+          "loss": 0.0018129077662403384
+        },
+        "Trans_medium": {
+          "train": 0.02,
+          "interp": 0.015151515151515152,
+          "extrap": 0.0,
+          "params": 5294096,
+          "loss": 0.8917821923891703
+        },
+        "Trans_large": {
+          "train": 0.0,
+          "interp": 0.0,
+          "extrap": 0.0,
+          "params": 31588368,
+          "loss": 2.2269461949666343
+        }
+      }
+    }
+  },
+  "model_comparison": {},
+  "environment": {
+    "python": "3.12.12",
+    "torch": "2.9.0+cu126",
+    "cuda": true,
+    "device": "cuda",
+    "gpu": "Tesla T4",
+    "gpu_memory_gb": 15.83
+  },
+  "last_updated": "2025-12-03T01:01:22.365215",
+  "duration_seconds": 295.760464,
+  "end_time": "2025-12-03T01:01:22.364759"
+}

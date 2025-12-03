@@ -1,0 +1,28 @@
+{
+  "phase": "M2.5c",
+  "experiment": "Fine-tuning Comparison",
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "pool_size": 2000,
+  "subset_size": 500,
+  "results": {
+    "random": {
+      "final_loss": 1.2541,
+      "samples": 500
+    },
+    "st_curated": {
+      "final_loss": 1.252,
+      "samples": 500
+    },
+    "hdc_curated": {
+      "final_loss": 1.2194,
+      "samples": 500
+    }
+  },
+  "comparison": {
+    "hdc_vs_random_pct": 2.7669244876804044,
+    "hdc_vs_st_pct": 2.6038338658146936,
+    "st_vs_random_pct": 0.1674507615022718
+  },
+  "winner": "HDC-Curated",
+  "verdict": "SUCCESS"
+}

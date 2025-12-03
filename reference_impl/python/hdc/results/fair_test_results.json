@@ -1,0 +1,22 @@
+{
+  "start_time": "2025-12-03T07:18:10.825658",
+  "device": "cuda",
+  "levels": {},
+  "summary": {
+    "total_examples": 96,
+    "train_size": 72,
+    "test_size": 24,
+    "holdout_primitive": "swim",
+    "holdout_modifier": "four times",
+    "transformer_params": 1001099,
+    "epochs_trained": 70,
+    "train_accuracy": 0.875,
+    "hdc_extrapolation": 1.0,
+    "transformer_extrapolation": 0.20833333333333334,
+    "hypothesis_supported": false
+  },
+  "train_accuracy": 0.875,
+  "hdc_extrapolation": 1.0,
+  "transformer_extrapolation": 0.20833333333333334,
+  "end_time": "2025-12-03T07:18:38.198177"
+}

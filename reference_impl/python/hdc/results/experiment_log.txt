@@ -1,0 +1,190 @@
+[00:22:34] [INFO] ============================================================
+[00:22:34] [INFO] EXPERIMENT STARTED
+[00:22:34] [INFO] Time: 2025-12-03 00:22:34.800133
+[00:22:34] [INFO] ============================================================
+[00:22:34] [INFO] 
+>>> STEP: Environment Check
+[00:22:41] [INFO]   python_version: 3.12.12
+[00:22:41] [INFO]   platform: Linux-6.6.105+-x86_64-with-glibc2.35
+[00:22:41] [INFO]   torch_version: 2.9.0+cu126
+[00:22:41] [INFO]   cuda_available: True
+[00:22:41] [INFO]   gpu_name: Tesla T4
+[00:22:41] [INFO]   gpu_memory_gb: 15.828320256
+[00:22:41] [INFO] <<< DONE: Environment Check
+[00:22:41] [INFO] 
+>>> STEP: Install Dependencies
+[00:22:41] [INFO] Checking torch...
+[00:22:41] [INFO]   torch already installed
+[00:22:41] [INFO] Checking numpy...
+[00:22:41] [INFO]   numpy already installed
+[00:22:41] [INFO] Checking matplotlib...
+[00:22:41] [INFO]   matplotlib already installed
+[00:22:41] [INFO] Checking seaborn...
+[00:22:43] [INFO]   seaborn already installed
+[00:22:43] [INFO] Checking pandas...
+[00:22:43] [INFO]   pandas already installed
+[00:22:43] [INFO] Checking tqdm...
+[00:22:43] [INFO]   tqdm already installed
+[00:22:43] [INFO] All dependencies ready
+[00:22:43] [INFO] <<< DONE: Install Dependencies
+[00:22:43] [INFO] 
+>>> STEP: Imports
+[00:22:43] [INFO] Device: cuda
+[00:22:43] [INFO] RESULT: device = cuda
+[00:22:43] [INFO] <<< DONE: Imports
+[00:22:43] [INFO] 
+>>> STEP: Create Language
+[00:22:43] [INFO] Total examples generated: 35
+[00:22:43] [INFO] RESULT: total_examples = 35
+[00:22:43] [INFO] Sample examples:
+[00:22:43] [INFO]   'walk' → 'WALK'
+[00:22:43] [INFO]   'run' → 'RUN'
+[00:22:43] [INFO]   'jump' → 'JUMP'
+[00:22:43] [INFO]   'look' → 'LOOK'
+[00:22:43] [INFO]   'turn' → 'TURN'
+[00:22:43] [INFO] <<< DONE: Create Language
+[00:22:43] [INFO] 
+>>> STEP: Create Splits
+[00:22:43] [INFO] Train examples: 16
+[00:22:43] [INFO] Test (extrapolation) examples: 19
+[00:22:43] [INFO] RESULT: train_size = 16
+[00:22:43] [INFO] RESULT: test_size = 19
+[00:22:43] [INFO] 
+Test examples (what we want to generalize to):
+[00:22:43] [INFO]   'walk thrice' → 'WALK WALK WALK'
+[00:22:43] [INFO]   'look twice' → 'LOOK LOOK'
+[00:22:43] [INFO]   'look thrice' → 'LOOK LOOK LOOK'
+[00:22:43] [INFO]   'turn twice' → 'TURN TURN'
+[00:22:43] [INFO]   'turn thrice' → 'TURN TURN TURN'
+[00:22:43] [INFO]   'walk and look' → 'WALK LOOK'
+[00:22:43] [INFO]   'walk and turn' → 'WALK TURN'
+[00:22:43] [INFO]   'run and look' → 'RUN LOOK'
+[00:22:43] [INFO] <<< DONE: Create Splits
+[00:22:43] [INFO] 
+>>> STEP: Create HDC Model
+[00:22:43] [INFO] HDC model trained on 16 examples
+[00:22:43] [INFO] <<< DONE: Create HDC Model
+[00:22:43] [INFO] 
+>>> STEP: Test HDC Model
+[00:22:43] [INFO] 
+--- HDC Predictions on EXTRAPOLATION set ---
+[00:22:43] [INFO] ✓ 'walk thrice' → 'WALK WALK WALK' (expected: 'WALK WALK WALK')
+[00:22:43] [INFO] ✓ 'look twice' → 'LOOK LOOK' (expected: 'LOOK LOOK')
+[00:22:43] [INFO] ✓ 'look thrice' → 'LOOK LOOK LOOK' (expected: 'LOOK LOOK LOOK')
+[00:22:43] [INFO] ✓ 'turn twice' → 'TURN TURN' (expected: 'TURN TURN')
+[00:22:43] [INFO] ✓ 'turn thrice' → 'TURN TURN TURN' (expected: 'TURN TURN TURN')
+[00:22:43] [INFO] ✓ 'walk and look' → 'WALK LOOK' (expected: 'WALK LOOK')
+[00:22:43] [INFO] ✓ 'walk and turn' → 'WALK TURN' (expected: 'WALK TURN')
+[00:22:43] [INFO] ✓ 'run and look' → 'RUN LOOK' (expected: 'RUN LOOK')
+[00:22:43] [INFO] ✓ 'run and turn' → 'RUN TURN' (expected: 'RUN TURN')
+[00:22:43] [INFO] ✓ 'jump and look' → 'JUMP LOOK' (expected: 'JUMP LOOK')
+[00:22:43] [INFO] ✓ 'jump and turn' → 'JUMP TURN' (expected: 'JUMP TURN')
+[00:22:43] [INFO] ✓ 'look and walk' → 'LOOK WALK' (expected: 'LOOK WALK')
+[00:22:43] [INFO] ✓ 'look and run' → 'LOOK RUN' (expected: 'LOOK RUN')
+[00:22:43] [INFO] ✓ 'look and jump' → 'LOOK JUMP' (expected: 'LOOK JUMP')
+[00:22:43] [INFO] ✓ 'look and turn' → 'LOOK TURN' (expected: 'LOOK TURN')
+[00:22:43] [INFO] ✓ 'turn and walk' → 'TURN WALK' (expected: 'TURN WALK')
+[00:22:43] [INFO] ✓ 'turn and run' → 'TURN RUN' (expected: 'TURN RUN')
+[00:22:43] [INFO] ✓ 'turn and jump' → 'TURN JUMP' (expected: 'TURN JUMP')
+[00:22:43] [INFO] ✓ 'turn and look' → 'TURN LOOK' (expected: 'TURN LOOK')
+[00:22:43] [INFO] 
+HDC Accuracy: 100.0% (19/19)
+[00:22:43] [INFO] RESULT: hdc_accuracy = 1.0
+[00:22:43] [INFO] RESULT: hdc_correct = 19
+[00:22:43] [INFO] RESULT: hdc_total = 19
+[00:22:43] [INFO] <<< DONE: Test HDC Model
+[00:22:43] [INFO] 
+>>> STEP: Create Vocabulary & Dataset
+[00:22:43] [INFO] Source vocabulary: 12 words
+[00:22:43] [INFO] Target vocabulary: 9 words
+[00:22:43] [INFO] Training batches: 1
+[00:22:43] [INFO] <<< DONE: Create Vocabulary & Dataset
+[00:22:43] [INFO] 
+>>> STEP: Create Transformer Model
+[00:22:44] [INFO] Model parameters: 932,617
+[00:22:44] [INFO] RESULT: transformer_params = 932617
+[00:22:44] [INFO] <<< DONE: Create Transformer Model
+[00:22:44] [INFO] 
+>>> STEP: Train Transformer
+[00:22:49] [INFO] Training for 100 epochs...
+[00:22:50] [INFO] Epoch 20: Loss = 0.1144
+[00:22:50] [INFO] Epoch 40: Loss = 0.0224
+[00:22:50] [INFO] Epoch 60: Loss = 0.0048
+[00:22:51] [INFO] Epoch 80: Loss = 0.0035
+[00:22:51] [INFO] Epoch 100: Loss = 0.0028
+[00:22:51] [INFO] Final loss: 0.0028
+[00:22:51] [INFO] RESULT: transformer_final_loss = 0.002822070848196745
+[00:22:51] [INFO] <<< DONE: Train Transformer
+[00:22:51] [INFO] 
+>>> STEP: Test Transformer
+[00:22:51] [INFO] 
+--- Transformer on TRAINING data (sample) ---
+[00:22:51] [INFO] ✗ 'walk' → 'RUN' (expected: 'WALK')
+[00:22:51] [INFO] ✓ 'run' → 'RUN' (expected: 'RUN')
+[00:22:51] [INFO] ✗ 'jump' → 'RUN' (expected: 'JUMP')
+[00:22:51] [INFO] ✗ 'look' → 'RUN' (expected: 'LOOK')
+[00:22:51] [INFO] ✗ 'turn' → 'RUN' (expected: 'TURN')
+[00:22:51] [INFO] ✗ 'walk twice' → 'RUN' (expected: 'WALK WALK')
+[00:22:51] [INFO] ✗ 'run twice' → 'RUN' (expected: 'RUN RUN')
+[00:22:51] [INFO] ✗ 'run thrice' → 'RUN RUN' (expected: 'RUN RUN RUN')
+[00:22:51] [INFO] ✗ 'jump twice' → 'JUMP' (expected: 'JUMP JUMP')
+[00:22:51] [INFO] ✗ 'jump thrice' → 'JUMP JUMP' (expected: 'JUMP JUMP JUMP')
+[00:22:51] [INFO] Train sample accuracy: 1/10
+[00:22:51] [INFO] 
+--- Transformer on EXTRAPOLATION data ---
+[00:22:51] [INFO] ✗ 'walk thrice' → 'JUMP JUMP' (expected: 'WALK WALK WALK')
+[00:22:51] [INFO] ✗ 'look twice' → 'RUN' (expected: 'LOOK LOOK')
+[00:22:51] [INFO] ✗ 'look thrice' → 'JUMP JUMP' (expected: 'LOOK LOOK LOOK')
+[00:22:51] [INFO] ✗ 'turn twice' → 'RUN' (expected: 'TURN TURN')
+[00:22:51] [INFO] ✗ 'turn thrice' → 'JUMP JUMP' (expected: 'TURN TURN TURN')
+[00:22:51] [INFO] ✗ 'walk and look' → 'JUMP' (expected: 'WALK LOOK')
+[00:22:51] [INFO] ✗ 'walk and turn' → 'RUN' (expected: 'WALK TURN')
+[00:22:51] [INFO] ✗ 'run and look' → 'JUMP' (expected: 'RUN LOOK')
+[00:22:51] [INFO] ✗ 'run and turn' → 'RUN' (expected: 'RUN TURN')
+[00:22:52] [INFO] ✗ 'jump and look' → 'JUMP' (expected: 'JUMP LOOK')
+[00:22:52] [INFO] ✗ 'jump and turn' → 'RUN' (expected: 'JUMP TURN')
+[00:22:52] [INFO] ✗ 'look and walk' → 'RUN' (expected: 'LOOK WALK')
+[00:22:52] [INFO] ✗ 'look and run' → 'RUN' (expected: 'LOOK RUN')
+[00:22:52] [INFO] ✗ 'look and jump' → 'JUMP' (expected: 'LOOK JUMP')
+[00:22:52] [INFO] ✗ 'look and turn' → 'RUN' (expected: 'LOOK TURN')
+[00:22:52] [INFO] ✗ 'turn and walk' → 'RUN' (expected: 'TURN WALK')
+[00:22:52] [INFO] ✗ 'turn and run' → 'RUN' (expected: 'TURN RUN')
+[00:22:52] [INFO] ✗ 'turn and jump' → 'JUMP' (expected: 'TURN JUMP')
+[00:22:52] [INFO] ✗ 'turn and look' → 'JUMP' (expected: 'TURN LOOK')
+[00:22:52] [INFO] 
+Transformer Extrapolation Accuracy: 0.0% (0/19)
+[00:22:52] [INFO] RESULT: transformer_accuracy = 0.0
+[00:22:52] [INFO] RESULT: transformer_correct = 0
+[00:22:52] [INFO] RESULT: transformer_total = 19
+[00:22:52] [INFO] <<< DONE: Test Transformer
+[00:22:52] [INFO] 
+>>> STEP: Final Comparison
+[00:22:52] [INFO] 
+============================================================
+[00:22:52] [INFO] FINAL RESULTS COMPARISON
+[00:22:52] [INFO] ============================================================
+[00:22:52] [INFO] 
+Model                Extrapolation Accuracy   
+[00:22:52] [INFO] ---------------------------------------------
+[00:22:52] [INFO] HDC                  100.0%
+[00:22:52] [INFO] Transformer          0.0%
+[00:22:52] [INFO] ============================================================
+[00:22:52] [INFO] 
+✓ HDC outperforms Transformer by 100.0%
+[00:22:52] [INFO]   This supports the hypothesis: structural composition
+[00:22:52] [INFO]   enables better generalization than learned patterns.
+[00:22:52] [INFO] RESULT: hypothesis_supported = True
+[00:22:52] [INFO] RESULT: accuracy_difference = 1.0
+[00:22:52] [INFO] <<< DONE: Final Comparison
+[00:22:52] [INFO] 
+>>> STEP: Create Visualization
+[00:22:52] [INFO] 
+📊 Chart saved to: experiment_results.png
+[00:22:52] [INFO] <<< DONE: Create Visualization
+[00:22:52] [INFO] 
+============================================================
+[00:22:52] [INFO] EXPERIMENT COMPLETED
+[00:22:52] [INFO] Duration: 17.9 seconds
+[00:22:52] [INFO] Steps completed: 13
+[00:22:52] [INFO] Errors: 0
+[00:22:52] [INFO] ============================================================

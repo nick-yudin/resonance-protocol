@@ -1,0 +1,59 @@
+{
+  "phase": "M2.5e",
+  "experiment": "Curriculum Learning Optimization",
+  "goal": "Capture the optimal point observed in M2.5d (1.1615)",
+  "previous_best": 1.2194,
+  "observed_minimum_m2.5d": 1.1615,
+  "results": {
+    "sharp": {
+      "final_loss": 1.125,
+      "best_loss": 1.1206,
+      "best_step": 80,
+      "lr_decay": false,
+      "vs_m2.5c_pct": 8.102345415778252
+    },
+    "sharp_lr_decay": {
+      "final_loss": 1.1845,
+      "best_loss": 1.1651,
+      "best_step": 65,
+      "lr_decay": true,
+      "vs_m2.5c_pct": 4.453009676890275
+    },
+    "gradual": {
+      "final_loss": 1.2074,
+      "best_loss": 1.1491,
+      "best_step": 35,
+      "lr_decay": false,
+      "vs_m2.5c_pct": 5.765130391996066
+    },
+    "gradual_lr_decay": {
+      "final_loss": 1.2444,
+      "best_loss": 1.1837,
+      "best_step": 80,
+      "lr_decay": true,
+      "vs_m2.5c_pct": 2.9276693455797984
+    },
+    "three_phase": {
+      "final_loss": 1.2227,
+      "best_loss": 1.1311,
+      "best_step": 80,
+      "lr_decay": false,
+      "vs_m2.5c_pct": 7.24126619649008
+    },
+    "three_phase_lr_decay": {
+      "final_loss": 1.2617,
+      "best_loss": 1.1657,
+      "best_step": 80,
+      "lr_decay": true,
+      "vs_m2.5c_pct": 4.403805150073813
+    }
+  },
+  "overall_best": {
+    "strategy": "sharp",
+    "best_loss": 1.1206,
+    "best_step": 80,
+    "improvement_over_m2.5c_pct": 8.102345415778252
+  },
+  "beat_m2.5c": true,
+  "beat_observed_minimum": true
+}

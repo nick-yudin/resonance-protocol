@@ -1,0 +1,48 @@
+{
+  "phase": "M2.5_prime",
+  "experiment": "HDC Semantic Header",
+  "model": "facebook/opt-350m",
+  "hidden_size": 512,
+  "dataset": "SST-2",
+  "train_samples": 2000,
+  "val_samples": 500,
+  "results": {
+    "baseline": {
+      "name": "Baseline (no header)",
+      "use_header": false,
+      "n_tokens": 0,
+      "best_val_acc": 0.848,
+      "trainable_params": 131842,
+      "vs_baseline_pct": 0.0
+    },
+    "header_k2": {
+      "name": "HDC Header (k=2)",
+      "use_header": true,
+      "n_tokens": 2,
+      "best_val_acc": 0.692,
+      "trainable_params": 22712066,
+      "vs_baseline_pct": -18.396226415094343
+    },
+    "header_k4": {
+      "name": "HDC Header (k=4)",
+      "use_header": true,
+      "n_tokens": 4,
+      "best_val_acc": 0.76,
+      "trainable_params": 24810242,
+      "vs_baseline_pct": -10.377358490566033
+    },
+    "header_k8": {
+      "name": "HDC Header (k=8)",
+      "use_header": true,
+      "n_tokens": 8,
+      "best_val_acc": 0.776,
+      "trainable_params": 29006594,
+      "vs_baseline_pct": -8.490566037735844
+    }
+  },
+  "baseline_accuracy": 0.848,
+  "best_header_accuracy": 0.776,
+  "best_header_config": "HDC Header (k=8)",
+  "improvement_pct": -8.490566037735844,
+  "verdict": "FAILURE"
+}
