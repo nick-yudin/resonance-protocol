@@ -199,4 +199,4 @@ epoch_indices = compute_sharp_curriculum(sorted_indices, num_epochs=10)
 
 ## Next: M2.6 Compositional Generalization
 
-[Continue to M2.6: Compositional Generalization →](./m2-6-compositional)
+[Continue to M2.6: Compositional Generalization →](/docs/research/m2-6-compositional)

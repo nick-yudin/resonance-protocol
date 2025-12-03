@@ -43,8 +43,8 @@ gantt
 
 **Goal:** Prove HDC can optimize data selection and curriculum design.
 
-- [**M2.5a: Data Curation**](./m2-5-data-curation) - HDC clustering competitive with Sentence Transformers
-- [**M2.5b: Curriculum Learning**](./m2-5-curriculum) - Sharp HDC-guided curriculum achieves 100% accuracy
+- [**M2.5a: Data Curation**](/docs/research/m2-5-data-curation) - HDC clustering competitive with Sentence Transformers
+- [**M2.5b: Curriculum Learning**](/docs/research/m2-5-curriculum) - Sharp HDC-guided curriculum achieves 100% accuracy
 
 **Key Finding:** HDC-based semantic clustering enables intelligent data selection and curriculum design.
 
@@ -52,7 +52,7 @@ gantt
 
 **Goal:** Prove HDC enables perfect compositional reasoning.
 
-- [**M2.6: Compositional Generalization**](./m2-6-compositional) - 100% accuracy on unseen attribute combinations
+- [**M2.6: Compositional Generalization**](/docs/research/m2-6-compositional) - 100% accuracy on unseen attribute combinations
 
 **Key Finding:** HDC's algebraic properties enable perfect zero-shot generalization to novel combinations.
 
@@ -60,9 +60,9 @@ gantt
 
 **Goal:** Prove HDC enables practical distributed semantic synchronization.
 
-- [**M3a: Raw Distributed Training**](./m3-distributed-training) - Multi-node LoRA training via Firebase
-- [**M3b: HDC Compression**](./m3-hdc-compression) - 32× compression of semantic knowledge
-- [**M3c′: Cross-Architecture Transfer**](./m3-cross-architecture) - 93% knowledge transfer between different architectures
+- [**M3a: Raw Distributed Training**](/docs/research/m3-series#phase-m3a-raw-distributed-training) - Multi-node LoRA training via Firebase
+- [**M3b: HDC Compression**](/docs/research/m3-series#phase-m3b-hdc-compression) - 32× compression of semantic knowledge
+- [**M3c′: Cross-Architecture Transfer**](/docs/research/m3-series#phase-m3c-cross-architecture-knowledge-transfer) - 93% knowledge transfer between different architectures
 
 **Key Finding:** HDC provides an architecture-agnostic semantic representation that enables extreme compression and cross-architecture knowledge transfer.
 

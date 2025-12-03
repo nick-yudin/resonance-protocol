@@ -450,8 +450,8 @@ export default function Demo() {
                         <span>blue square</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">🟡🔺</span>
-                        <span>yellow triangle</span>
+                        <span className="text-2xl">🟡🔷</span>
+                        <span>yellow diamond</span>
                       </div>
                     </div>
                   </div>
@@ -465,7 +465,7 @@ export default function Demo() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="text-2xl">🔷</span>
-                        <span>blue triangle ✓</span>
+                        <span>blue diamond ✓</span>
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="text-2xl">🟡</span>

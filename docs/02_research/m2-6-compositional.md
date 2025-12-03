@@ -242,4 +242,4 @@ sequenceDiagram
 
 ## Next: M3 Series (Distributed Intelligence)
 
-[Continue to M3a: Distributed Training →](./m3-distributed-training)
+[Continue to M3 Series: Distributed Intelligence →](/docs/research/m3-series)

@@ -181,4 +181,4 @@ curated_texts = [training_texts[i] for i in selected_indices]
 
 ## Next: M2.5b Curriculum Learning
 
-[Continue to M2.5b: Curriculum Learning →](./m2-5-curriculum)
+[Continue to M2.5b: Curriculum Learning →](/docs/research/m2-5-curriculum)
