@@ -60,7 +60,7 @@ sequenceDiagram
 
 ### Visualization
 
-*(Visualization available in full research results)*
+![M3a Distributed Training](/research/phase_m3a_distributed_training.png)
 
 ### Interpretation
 

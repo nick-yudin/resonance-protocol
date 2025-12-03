@@ -87,7 +87,7 @@ graph LR
 
 ### Curriculum Comparison
 
-*(Visualization available in full research results)*
+![Curriculum Learning Results](/research/phase_m2.5b_curriculum_comparison.png)
 
 ### Difficulty Distribution
 

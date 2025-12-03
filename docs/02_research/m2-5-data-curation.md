@@ -111,7 +111,7 @@ graph TD
 
 ### Coverage Comparison
 
-*(Visualization available in full research results)*
+![Data Curation Coverage](/research/phase_m2.5a_curation_comparison_coverage.png)
 
 ---
 
