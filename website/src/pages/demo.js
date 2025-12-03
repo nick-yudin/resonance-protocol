@@ -8,12 +8,13 @@ export default function Demo() {
   const [transferProgress, setTransferProgress] = useState(0);
   const [generalizationProgress, setGeneralizationProgress] = useState(0);
 
-  // Setup Tailwind CSS
+  // Setup Tailwind CSS with faster loading
   useEffect(() => {
     if (!document.getElementById('tailwind-script')) {
       const script = document.createElement('script');
       script.id = 'tailwind-script';
       script.src = "https://cdn.tailwindcss.com";
+      script.async = false; // Load synchronously for faster processing
       document.head.appendChild(script);
     }
   }, []);
@@ -62,7 +63,15 @@ export default function Demo() {
       title="Interactive Demo"
       description="Try Resonance Protocol's HDC technology live in your browser"
     >
-      <div className="min-h-screen bg-[#0a0a0a] text-white">
+      <Head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <style>{`
+          /* Critical inline styles for instant render */
+          body { margin: 0; }
+          .demo-container { min-height: 100vh; background-color: #0a0a0a; color: white; }
+        `}</style>
+      </Head>
+      <div className="min-h-screen bg-[#0a0a0a] text-white demo-container">
 
         {/* Hero */}
         <section className="py-20 px-6 border-b border-white/5">
