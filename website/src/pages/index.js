@@ -415,13 +415,13 @@ export default function Home() {
               </div>
               {/* Chart */}
               <div className="mt-4 h-32 bg-noise/50 rounded-lg overflow-hidden border border-white/5">
-                <img src="/research/m3c_transfer.png" alt="93% transfer efficiency chart" className="w-full h-full object-contain opacity-80" />
+                <img src="/research/phase_m2.5b_curriculum_comparison.png" alt="93% transfer efficiency chart" className="w-full h-full object-contain opacity-80" />
               </div>
             </div>
 
             {/* Result 3: Compositional Generalization */}
             <div className="glass p-8 rounded-xl border-signal/30 hover:border-signal transition-colors group">
-              <div className="text-6xl font-bold text-white mb-4">100%</div>
+              <div className="text-6xl font-bold text-signal mb-4">100%</div>
               <h4 className="text-xl font-bold text-white mb-3">HDC Generalization</h4>
               <p className="text-gray-400 text-sm mb-4">
                 Perfect compositional generalization where Transformers achieve only 21% on unseen combinations.
@@ -606,18 +606,9 @@ export default function Home() {
                 When it arrives, the economics of AI will flip. Datacenters won't be the only way.
               </p>
               <p className="text-xl text-white font-bold mt-6">
-                We're building the protocol that's ready for that hardware.
+                We're building the architecture for that future — one that works today and scales exponentially tomorrow.
               </p>
             </div>
-          </div>
-
-          {/* Benchmark Visualization */}
-          <div className="mt-16">
-            <h3 className="text-3xl font-display font-bold text-white mb-8 text-center">See It In Action</h3>
-            <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
-              Live simulation comparing traditional approach (MQTT) vs Resonance Protocol over 1 hour of sensor data
-            </p>
-            <BenchmarkViz />
           </div>
         </div>
       </section>
@@ -838,7 +829,7 @@ export default function Home() {
               <div>
                 <div className="text-3xl font-bold text-signal mb-3">2</div>
                 <p className="text-sm text-gray-300">
-                  <a href="/demo" className="text-white hover:text-signal transition-colors font-bold">Try interactive demo</a>
+                  <a href="/demo" target="_blank" rel="noopener noreferrer" className="text-white hover:text-signal transition-colors font-bold">Try interactive demo</a>
                 </p>
               </div>
               <div>
