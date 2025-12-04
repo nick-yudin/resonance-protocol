@@ -865,9 +865,13 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="glass p-12 rounded-2xl">
             <div className="flex flex-col md:flex-row gap-8 items-center">
-              {/* Photo placeholder */}
-              <div className="w-32 h-32 rounded-full bg-noise border-2 border-signal/30 flex-shrink-0 overflow-hidden flex items-center justify-center">
-                <span className="text-gray-600 text-xs font-mono">[PHOTO]</span>
+              {/* Photo */}
+              <div className="w-32 h-32 rounded-full bg-noise border-2 border-signal/30 flex-shrink-0 overflow-hidden">
+                <img
+                  src="/Nikolay_Yudin.jpg"
+                  alt="Nikolay Yudin"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white mb-2">Nikolay Yudin</h3>
