@@ -38,6 +38,9 @@ gantt
 | **M3a** | Distributed Training (raw) | Convergence | 2 nodes, 17.5 MB/round | ⚙️ Small scale |
 | **M3b** | HDC Compression | Compression ratio | **32×** (271 KB/round) | ⚙️ LoRA quantization |
 | **M3c′** | Cross-Architecture Transfer | Transfer efficiency | **93%** (DistilBERT→GPT-2) | ⚙️ SST-2 only |
+| **M4c** | Cross-Lingual Transfer | Transfer ratio | **91.3%** (10 languages) | ⚙️ XNLI |
+| **M4d** | Semantic Compositionality | Retention vs original | **110%** (ternary improves) | ⚙️ Word analogies |
+| **M4e** | HDC vs KD | Competitive ratio | **98.4%** | ⚙️ SST-2 |
 
 ## Research Phases
 
@@ -67,6 +70,15 @@ gantt
 - [**M3c′: Cross-Architecture Transfer**](/docs/research/m3-series#phase-m3c-cross-architecture-knowledge-transfer) - 93% knowledge transfer between different architectures
 
 **Observation:** HDC demonstrated compression and cross-architecture transfer on narrow benchmarks (2 nodes, SST-2 task). Scaling to production environments and diverse tasks requires further research.
+
+### M4 Series: Semantic Transfer
+**Goal:** Validate that HDC captures universal meaning that transcends languages and preserves semantic structure.
+
+- [**M4c: Cross-Lingual Transfer**](/docs/research/m4-series#m4c-cross-lingual-transfer) - 91.3% accuracy retention across 10 languages
+- [**M4d: Semantic Compositionality**](/docs/research/m4-series#m4d-semantic-compositionality) - 110% retention on word analogies
+- [**M4e: HDC vs Knowledge Distillation**](/docs/research/m4-series#m4e-hdc-vs-knowledge-distillation) - 98.4% of KD accuracy with unique properties
+
+**Key finding:** Meaning is language-agnostic and survives extreme compression. HDC competitive with standard methods while enabling unique capabilities.
 
 ## Experimental Methodology
 

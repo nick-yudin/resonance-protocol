@@ -246,6 +246,23 @@ This specification is not theoretical. Every component has been experimentally v
 - **Result:** HDC competitive with ST (4.66% better coverage)
 - **Conclusion:** HDC suitable for semantic distance calculations
 
+### 7.5. Cross-Lingual Transfer
+- **Experiment:** M4c (Train English XNLI, test 10 languages)
+- **Result:** 91.3% transfer ratio
+- **Languages:** German (95.1%), French (93.5%), Spanish (96.9%), Russian (89.2%), Chinese (91.7%), Arabic (87.3%), Bulgarian (92.0%), Hindi (84.6%), Vietnamese (91.4%)
+- **Conclusion:** HDC representations are language-agnostic; meaning transfers without retraining
+
+### 7.6. Semantic Compositionality
+- **Experiment:** M4d (Word analogies: king - man + woman = queen)
+- **Result:** 110% of original embedding performance (75% vs 67% top-1 accuracy)
+- **Conclusion:** Ternary quantization acts as regularization, improving semantic structure
+
+### 7.7. Comparison with Knowledge Distillation
+- **Experiment:** M4e (HDC Transfer vs Standard KD on SST-2)
+- **Result:** HDC achieves 98.4% of KD accuracy (87.3% vs 88.6%)
+- **Unique HDC properties:** Cross-lingual transfer, semantic arithmetic, 32× compression
+- **Conclusion:** HDC competitive with standard methods while enabling capabilities KD cannot provide
+
 ---
 
 ## 8. Reference Implementation

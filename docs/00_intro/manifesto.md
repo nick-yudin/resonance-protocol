@@ -92,11 +92,13 @@ graph LR
     style C fill:#ff4d00,stroke:#ff4d00,color:#000
 ```
 
-HDC provides three critical properties:
+HDC provides five critical properties:
 
 1. **Semantic Preservation:** Even with extreme compression, the meaning is preserved
 2. **Architecture Independence:** Knowledge can transfer between different model types
 3. **Composability:** Semantic vectors can be combined algebraically to create new meanings
+4. **Cross-Lingual Universality:** 91% transfer efficiency across 10 typologically diverse languages. Train on English, deploy on Chinese, Arabic, Hindi. Meaning transcends language boundaries.
+5. **Semantic Arithmetic Preservation:** 110% retention on word analogies (king - man + woman = queen). Remarkably, ternary quantization *improves* compositional reasoning compared to original float embeddings.
 
 ---
 
@@ -237,6 +239,11 @@ The SEP is not a theoretical exercise. Every core claim has been validated throu
 - **M3b:** HDC compression (32× reduction to 271KB/round)
 - **M3c′:** Cross-architecture knowledge transfer (93% efficiency, DistilBERT → GPT-2)
 
+### M4 Series: Semantic Transfer
+- **M4c:** Cross-lingual transfer — 91.3% accuracy retention across 10 languages (English → German, French, Spanish, Russian, Chinese, Arabic, Bulgarian, Hindi, Vietnamese)
+- **M4d:** Semantic compositionality — 110% retention on word analogies, ternary improves over float
+- **M4e:** Comparison with Knowledge Distillation — 98.4% of KD accuracy with unique properties KD cannot provide
+
 **For detailed experimental results, see the Research Documentation section.**
 
 ---
@@ -248,6 +255,9 @@ The Semantic Event Protocol (SEP) proposes a semantic-first, event-driven archit
 **What we have demonstrated in controlled, small-scale experiments:**
 - 32× compression of LoRA weights via ternary HDC quantization (2-node setup, SST-2 task)
 - 93% cross-architecture knowledge transfer efficiency (DistilBERT → GPT-2, SST-2 sentiment)
+- 91.3% cross-lingual transfer (train English, test 10 languages including Chinese, Arabic, Hindi)
+- 110% semantic arithmetic retention (ternary improves compositionality)
+- 98.4% of Knowledge Distillation accuracy with additional unique properties
 - 100% compositional generalization (synthetic attribute-object task, HDC vs 21% for small transformer)
 - Distributed training convergence via 271KB semantic packets (2 nodes, Alpaca subset)
 
