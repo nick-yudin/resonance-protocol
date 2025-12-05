@@ -1,0 +1,22 @@
+{
+  "experiment": "M4d Compositionality",
+  "paper": "...Until We Found Meaning",
+  "num_analogies": 12,
+  "vocab_size": 71,
+  "results": {
+    "baseline": {
+      "top1": 0.6666666666666666,
+      "top5": 0.8333333333333334
+    },
+    "float_hdc": {
+      "top1": 0.6666666666666666,
+      "top5": 0.8333333333333334
+    },
+    "ternary_hdc": {
+      "top1": 0.75,
+      "top5": 0.9166666666666666
+    }
+  },
+  "retention_rate": 1.0999999999999999,
+  "timestamp": "2025-12-05T20:57:10.338372"
+}
