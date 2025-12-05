@@ -67,9 +67,3 @@ This experiment validates that:
 - `M4c_CrossLingual.ipynb` - Complete experiment notebook
 - `m4c_crosslingual_results.json` - Raw results data
 - `m4c_crosslingual_results.png` - Performance visualization
-
-## Citation
-
-For paper: "...Until We Found Meaning"
-
-This experiment demonstrates that HDC vectors capture language-independent semantic representations, enabling cross-lingual knowledge sharing in distributed AI systems.
