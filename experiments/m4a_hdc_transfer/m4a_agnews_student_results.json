@@ -1,0 +1,32 @@
+{
+  "phase": "M4a",
+  "experiment": "AG News 4-Class HDC Transfer",
+  "dataset": "ag_news",
+  "num_classes": 4,
+  "class_names": [
+    "World",
+    "Sports",
+    "Business",
+    "Sci/Tech"
+  ],
+  "node": "student",
+  "teacher_model": "distilbert-base-uncased",
+  "student_model": "HDCClassifier (3-layer MLP)",
+  "student_params": 2230020,
+  "hdc_dim": 4096,
+  "num_examples": 2000,
+  "teacher_accuracy_before": 0.258,
+  "teacher_accuracy_after": 0.932,
+  "student_accuracy_before": 0.262,
+  "student_accuracy_after": 0.866,
+  "student_teacher_ratio": 0.9291845493562231,
+  "random_baseline": 0.25,
+  "above_random": 0.616,
+  "sst2_comparison": {
+    "sst2_student": 0.77,
+    "sst2_teacher": 0.88,
+    "sst2_random": 0.5
+  },
+  "verdict": "EXCELLENT",
+  "timestamp": "2025-12-05T13:44:15.379132"
+}

@@ -1,0 +1,38 @@
+{
+  "phase": "M4a",
+  "experiment": "MNLI NLI HDC Transfer",
+  "dataset": "mnli",
+  "task": "Natural Language Inference",
+  "input_type": "sentence_pairs",
+  "num_classes": 3,
+  "class_names": [
+    "Entailment",
+    "Neutral",
+    "Contradiction"
+  ],
+  "node": "student",
+  "teacher_model": "distilbert-base-uncased",
+  "student_model": "HDCClassifier (3-layer MLP)",
+  "student_params": 2229763,
+  "hdc_dim": 4096,
+  "num_examples": 1998,
+  "teacher_accuracy_before": 0.346,
+  "teacher_accuracy_after": 0.666,
+  "student_accuracy_before": 0.308,
+  "student_accuracy_after": 0.45,
+  "student_teacher_ratio": 0.6756756756756757,
+  "random_baseline": 0.33,
+  "above_random": 0.12,
+  "comparison": {
+    "sst2": {
+      "student": 0.77,
+      "teacher": 0.88
+    },
+    "agnews": {
+      "student": 0.866,
+      "teacher": 0.932
+    }
+  },
+  "verdict": "PARTIAL SUCCESS",
+  "timestamp": "2025-12-05T14:02:34.660621"
+}

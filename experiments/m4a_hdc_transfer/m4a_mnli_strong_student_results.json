@@ -1,0 +1,31 @@
+{
+  "phase": "M4a",
+  "experiment": "MNLI Strong Teacher HDC Transfer",
+  "dataset": "mnli",
+  "task": "Natural Language Inference",
+  "hypothesis": "Smarter teacher = better transfer efficiency",
+  "node": "student",
+  "teacher_model": "roberta-large-mnli",
+  "student_model": "HDCClassifier (3-layer MLP)",
+  "student_params": 2229763,
+  "hdc_dim": 4096,
+  "num_examples": 1998,
+  "strong_teacher": {
+    "accuracy": 0.914,
+    "student_accuracy": 0.43,
+    "ratio": 0.47045951859956237,
+    "gap": 0.48400000000000004
+  },
+  "weak_teacher": {
+    "accuracy": 0.666,
+    "student_accuracy": 0.45,
+    "ratio": 0.6756756756756757,
+    "gap": 0.21600000000000003
+  },
+  "improvement": {
+    "student_accuracy": -0.020000000000000018,
+    "ratio": -0.2052161570761133
+  },
+  "verdict": "HYPOTHESIS REJECTED: Ratio did not improve",
+  "timestamp": "2025-12-05T15:17:54.250992"
+}

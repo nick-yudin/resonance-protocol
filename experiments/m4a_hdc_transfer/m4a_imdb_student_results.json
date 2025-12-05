@@ -1,0 +1,24 @@
+{
+  "phase": "M4a",
+  "experiment": "IMDB Long Text HDC Transfer",
+  "dataset": "imdb",
+  "avg_text_length": "~230 words",
+  "node": "student",
+  "teacher_model": "distilbert-base-uncased",
+  "student_model": "HDCClassifier (3-layer MLP)",
+  "student_params": 2229506,
+  "hdc_dim": 4096,
+  "num_examples": 2000,
+  "teacher_accuracy_before": 1.0,
+  "teacher_accuracy_after": 1.0,
+  "student_accuracy_before": 0.818,
+  "student_accuracy_after": 1.0,
+  "student_teacher_ratio": 1.0,
+  "sst2_comparison": {
+    "sst2_student": 0.77,
+    "sst2_teacher": 0.88,
+    "sst2_ratio": 0.875
+  },
+  "verdict": "EXCELLENT",
+  "timestamp": "2025-12-05T13:32:38.999579"
+}
