@@ -1,0 +1,15 @@
+{
+  "experiment": "M4c Cross-Lingual",
+  "paper": "...Until We Found Meaning",
+  "encoder": "paraphrase-multilingual-MiniLM-L12-v2",
+  "hdc_dim": 4096,
+  "train_lang": "English",
+  "train_size": 3000,
+  "results": {
+    "English": 0.8256880733944955
+  },
+  "english_acc": 0.8256880733944955,
+  "crosslingual_avg": NaN,
+  "transfer_ratio": NaN,
+  "timestamp": "2025-12-05T19:42:31.048184"
+}
