@@ -1,0 +1,18 @@
+{
+  "phase": "M3c_prime",
+  "node": "node_b_student",
+  "experiment": "Semantic Knowledge Transfer - Student",
+  "teacher_model": "distilbert-base-uncased",
+  "student_model": "gpt2",
+  "knowledge_examples": 320,
+  "test_samples": 500,
+  "teacher_accuracy_before": 0.49,
+  "teacher_accuracy_after": 0.866,
+  "teacher_improvement": 0.376,
+  "student_accuracy_before": 0.47,
+  "student_accuracy_after": 0.82,
+  "student_improvement": 0.35,
+  "transfer_efficiency_pct": 93.08510638297872,
+  "verdict": "SUCCESS",
+  "timestamp": "2025-12-03T19:05:28.932838"
+}

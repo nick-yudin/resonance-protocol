@@ -1,0 +1,16 @@
+{
+  "phase": "M3c_hepta_prime",
+  "experiment": "Combined HDC Transfer",
+  "node": "teacher",
+  "model": "distilbert-base-uncased",
+  "accuracy_before": 0.496,
+  "accuracy_after": 0.886,
+  "hdc_dim": 4096,
+  "num_examples": 2000,
+  "changes": [
+    "soft_labels",
+    "more_examples_2000"
+  ],
+  "baseline": "M3c_double_prime (59.2%)",
+  "timestamp": "2025-12-05T12:23:51.618981"
+}

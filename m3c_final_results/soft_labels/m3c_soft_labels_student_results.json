@@ -1,0 +1,21 @@
+{
+  "phase": "M3c_quad_prime",
+  "experiment": "Soft Labels HDC Transfer",
+  "single_change": "soft_labels",
+  "node": "student",
+  "teacher_model": "distilbert-base-uncased",
+  "student_model": "HDCClassifier (3-layer MLP)",
+  "student_params": 2229506,
+  "hdc_dim": 4096,
+  "num_examples": 500,
+  "loss_function": "KLDivLoss",
+  "teacher_accuracy_before": 0.47,
+  "teacher_accuracy_after": 0.874,
+  "student_accuracy_before": 0.452,
+  "student_accuracy_after": 0.732,
+  "transfer_efficiency_pct": 69.30693069306929,
+  "baseline_efficiency_pct": 59.2,
+  "improvement_vs_baseline": 10.106930693069287,
+  "verdict": "SIGNIFICANT IMPROVEMENT",
+  "timestamp": "2025-12-05T11:34:06.102319"
+}

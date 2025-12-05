@@ -1,0 +1,14 @@
+{
+  "phase": "M3c_hexa_prime",
+  "experiment": "Larger HDC Transfer",
+  "node": "teacher",
+  "model": "distilbert-base-uncased",
+  "accuracy_before": 0.47,
+  "accuracy_after": 0.866,
+  "hdc_dim": 10000,
+  "baseline_hdc_dim": 4096,
+  "num_examples": 500,
+  "single_change": "larger_hdc_10000",
+  "baseline": "M3c_double_prime (4096d)",
+  "timestamp": "2025-12-05T12:11:22.523726"
+}

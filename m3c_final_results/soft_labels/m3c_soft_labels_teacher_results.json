@@ -1,0 +1,13 @@
+{
+  "phase": "M3c_quad_prime",
+  "experiment": "Soft Labels HDC Transfer",
+  "node": "teacher",
+  "model": "distilbert-base-uncased",
+  "accuracy_before": 0.47,
+  "accuracy_after": 0.874,
+  "hdc_dim": 4096,
+  "num_examples": 500,
+  "single_change": "soft_labels",
+  "baseline": "M3c_double_prime (59.2%)",
+  "timestamp": "2025-12-05T11:32:19.317250"
+}

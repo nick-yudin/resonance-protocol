@@ -1,0 +1,16 @@
+{
+  "phase": "M3c_prime",
+  "node": "node_a_teacher",
+  "experiment": "Semantic Knowledge Transfer - Teacher",
+  "model": "distilbert-base-uncased",
+  "train_samples": 2000,
+  "test_samples": 500,
+  "accuracy_before": 0.49,
+  "accuracy_after": 0.866,
+  "improvement": 0.376,
+  "changed_examples": 170,
+  "confident_examples": 150,
+  "total_examples": 320,
+  "packet_size_kb": 2683.650390625,
+  "timestamp": "2025-12-03T18:39:18.356772"
+}

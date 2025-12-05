@@ -1,0 +1,13 @@
+{
+  "phase": "M3c_penta_prime",
+  "experiment": "More Examples HDC Transfer",
+  "node": "teacher",
+  "model": "distilbert-base-uncased",
+  "accuracy_before": 0.472,
+  "accuracy_after": 0.882,
+  "hdc_dim": 4096,
+  "num_examples": 2000,
+  "single_change": "more_examples_2000",
+  "baseline": "M3c_double_prime (500 examples)",
+  "timestamp": "2025-12-05T11:47:36.135897"
+}

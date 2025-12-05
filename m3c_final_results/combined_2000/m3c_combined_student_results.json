@@ -1,0 +1,26 @@
+{
+  "phase": "M3c_hepta_prime",
+  "experiment": "Combined HDC Transfer",
+  "changes": [
+    "soft_labels",
+    "more_examples_2000"
+  ],
+  "node": "student",
+  "teacher_model": "distilbert-base-uncased",
+  "student_model": "HDCClassifier (3-layer MLP)",
+  "student_params": 2229506,
+  "hdc_dim": 4096,
+  "num_examples": 2000,
+  "loss_function": "KLDivLoss",
+  "teacher_accuracy_before": 0.496,
+  "teacher_accuracy_after": 0.886,
+  "student_accuracy_before": 0.508,
+  "student_accuracy_after": 0.776,
+  "transfer_efficiency_pct": 68.71794871794872,
+  "baseline_efficiency_pct": 59.2,
+  "soft_labels_efficiency_pct": 69.3,
+  "more_examples_efficiency_pct": 73.2,
+  "improvement_vs_baseline": 9.517948717948713,
+  "verdict": "MODEST IMPROVEMENT",
+  "timestamp": "2025-12-05T12:25:48.583562"
+}

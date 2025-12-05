@@ -1,0 +1,21 @@
+{
+  "phase": "M3c_penta_prime",
+  "experiment": "More Examples HDC Transfer",
+  "single_change": "more_examples_2000",
+  "node": "student",
+  "teacher_model": "distilbert-base-uncased",
+  "student_model": "HDCClassifier (3-layer MLP)",
+  "student_params": 2229506,
+  "hdc_dim": 4096,
+  "num_examples": 2000,
+  "baseline_examples": 500,
+  "teacher_accuracy_before": 0.472,
+  "teacher_accuracy_after": 0.882,
+  "student_accuracy_before": 0.468,
+  "student_accuracy_after": 0.768,
+  "transfer_efficiency_pct": 73.17073170731706,
+  "baseline_efficiency_pct": 59.2,
+  "improvement_vs_baseline": 13.970731707317057,
+  "verdict": "SIGNIFICANT IMPROVEMENT",
+  "timestamp": "2025-12-05T11:49:10.600389"
+}

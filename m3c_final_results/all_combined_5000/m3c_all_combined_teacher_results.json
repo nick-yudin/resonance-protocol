@@ -1,0 +1,16 @@
+{
+  "phase": "M3c_nona_prime",
+  "experiment": "All Combined HDC Transfer",
+  "node": "teacher",
+  "model": "distilbert-base-uncased",
+  "accuracy_before": 0.472,
+  "accuracy_after": 0.874,
+  "hdc_dim": 4096,
+  "num_examples": 5000,
+  "changes": [
+    "soft_labels",
+    "5000_examples"
+  ],
+  "baseline": "M3c_double_prime",
+  "timestamp": "2025-12-05T13:05:03.484303"
+}
