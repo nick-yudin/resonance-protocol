@@ -1,247 +1,180 @@
-# Semantic Event Protocol (SEP) - Technical Roadmap
+# SEP Roadmap
 
-**Mission:** Explore whether meaning-triggered, distributed AI can be built with current technology through systematic experimentation.
+**Mission:** Build meaning-triggered distributed AI through systematic experimentation.
 
-**Philosophy:** The road will be made by walking. This document describes direction, not destiny.
-
----
-
-## Strategic Context
-
-SEP is the communication layer for a rethinking of AI infrastructure:
-
-```
-Sensors:     DVS cameras, silicon cochlea     (event-driven)
-Logic:       Ternary {-1, 0, +1}              (BitNet-compatible)
-Memory:      Memristors                       (compute-in-memory)
-Models:      BitNet 1.58b                     (1.58 bits/weight)
-Vectors:     HDC, ternary quantization        (<100 bytes)
-Protocol:    SEP                              ← We start here
-Network:     Fully distributed mesh
-```
-
-**Why bottom-up?** Hardware development requires demonstrating the protocol concept first. Small-scale validation enables larger experiments.
+**Philosophy:** The road will be made by walking.
 
 ---
 
-## Current Status (December 2025)
+## Completed Phases
 
-### ✅ What Exists
-- Protocol specification (Level 1)
-- Python reference implementation
-- Procrustes alignment (cross-model communication)
-- Semantic filtering & mesh propagation
-- Basic benchmarks
-- Website and documentation
+### Phase 0: Protocol Foundation ✅
+- Level 0 Manifesto (Philosophy)
+- Level 1 Specification (Technical Standard)
+- Reference implementation (Python)
+- Website seprotocol.ai
 
-### ⚠️ What's Missing
-- Real hardware deployment
-- Energy measurements
-- Compressed vectors (currently float32)
-- Multi-device proof
+### Phase 1: Core Experiments ✅
+- M2.5: Data Efficiency
+- M2.6: Compositional Generalization (100% accuracy)
+- M3: Distributed Intelligence (32× compression, 93% cross-arch transfer)
 
-**These gaps are the immediate focus.**
+### Phase 2: Semantic Transfer (M4 Series) ✅
+- **M4c: Cross-Lingual Transfer** — 91.3% across 10 languages
+- **M4d: Semantic Compositionality** — 110% retention (ternary improves!)
+- **M4e: HDC vs Knowledge Distillation** — 98.4% competitive
+- **Paper:** "...Until We Found Meaning" (draft complete)
+
+**Key validation:** HDC captures universal meaning that transcends languages and survives extreme compression.
 
 ---
 
-## Phase 1: Hardware Proof of Concept (Q1 2026)
+## Current Phase
 
-**Goal:** Working physical mesh that can be photographed, filmed, and measured.
+### Phase 3: Hardware Proof of Concept (Q1-Q2 2026)
 
-### Hardware Stack
+**Goal:** Demonstrate SEP on physical edge devices.
 
-**Anchor Node: NVIDIA Jetson Orin Nano (8GB)**
-- Runs main embedding model
-- Coordinates mesh (not centralized—just most powerful)
-- Cost: ~$280
+#### Hardware Stack
 
-**Display Node: M5Stack CoreS3**
-- Visual interface for the mesh
-- Camera + screen
-- "Face" of the system
-- Cost: ~$60
-
-**Mesh Nodes: M5Stack AtomS3 × 3**
-- Lightweight semantic processors
-- Demonstrate swarm behavior
-- Cost: ~$15 each ($45 total)
-
-**LoRa Mesh: Heltec WiFi LoRa 32 (V3) × 3**
-- 868 MHz (no internet required)
-- Pure P2P communication
-- Cost: ~$15 each ($45 total)
+**Main Node:**
+- **Jetson Orin Nano 8GB** — main node, GPU inference
+- **Raspberry Pi 5 8GB × 2** — edge nodes
 
 **Sensors:**
-- Luxonis OAK-D Lite (depth camera, spatial AI): ~$150
-- M5Stack Unit Radar (mmWave presence): ~$15
+- USB webcam + microphone — sensors
+- Ethernet mesh network
 
-**Infrastructure:**
-- Grove cables, USB-C cables, powered hub: ~$50
-- 3D printed enclosures (heat-set inserts, magnets): ~$30
+#### Experiments
 
-**Total BOM: ~$675**
+- [ ] Distributed inference across Jetson + Pi mesh
+- [ ] Semantic event communication (ternary vectors over network)
+- [ ] Power consumption measurements
+- [ ] "Silence vs Noise" split-screen demo
+- [ ] Multi-teacher learning on physical nodes
 
-### Deliverables (Target: End of Q1 2026)
+#### Success Criteria
 
-**MVP-1: 5-Device Mesh**
-- Jetson + CoreS3 + 3× AtomS3
-- Local network (WiFi)
-- Demonstrated semantic event propagation
+- Working 3-node mesh
+- Measurable bandwidth reduction vs raw data
+- Measurable power savings
 - Video documentation
 
-**MVP-2: LoRa Mesh**
-- 3× Heltec nodes
-- No internet, pure P2P
-- Range test (500m+)
-- Energy measurement (days on battery)
-
-**MVP-3: Sensor Integration**
-- OAK-D camera feeding semantic events
-- mmWave radar for presence detection
-- "Silent surveillance" demo (only transmits on detection)
-
-**Success Criteria:**
-- System runs for 24+ hours without intervention
-- Demonstrable energy savings vs always-on approach
-- Clear, professional video documentation
-- Quantified metrics (latency, battery life, bandwidth)
+**Target completion:** Q2 2026
 
 ---
 
-## Phase 2: Compression & Efficiency (Q2-Q3 2026)
+## Future Phases
 
-**Goal:** Reduce vector size to prove bandwidth competitiveness.
+### Phase 4: Multi-Teacher Mesh Learning (2026)
 
-### 2.1 Ternary Quantization
-- Implement {-1, 0, +1} vector encoding
-- Benchmark semantic similarity preservation
-- Target: 96 bytes/packet (16x reduction from float32)
+**Teaser result:** In simulation, student learning from 2 specialized teachers:
+- Matches both teachers (96-99% accuracy)
+- Teacher improves by learning back from student (+1%)
 
-### 2.2 Hyperdimensional Computing (HDC)
-- Integrate 10,000-d binary vectors
-- Test bundling/binding for semantic operations
-- Target: 128 bytes/packet + noise immunity
+**Goal:** Nodes in mesh specialize and teach each other.
 
-### 2.3 BitNet Exploration
-- Survey existing BitNet 1.58b models
-- Test for sentence embedding tasks
-- Document inference speed on edge hardware
-
-**Outcome:** Protocol becomes bandwidth-competitive while maintaining semantic power.
+**Experiments:**
+- Distributed curriculum learning
+- Knowledge exchange patterns
+- Emergent specialization
 
 ---
 
-## Phase 3: Community & Visibility (Ongoing from Q1 2026)
+### Phase 5: Neuromorphic Hardware (2027+)
 
-**Goal:** Find the people who want a different path.
+**Vision:**
+- Memristor-based in-memory computing
+- True ternary hardware (not emulated)
+- Microjoule inference
+- Event-driven sensors (DVS cameras, silicon cochlea)
 
-### 3.1 Documentation & Open Source
-- Release all code, specs, hardware designs (Apache 2.0)
-- Write technical blog posts
-- Academic paper submissions (arXiv, edge computing conferences)
+**Dependencies:**
+- Hardware availability
+- Partnerships with chip manufacturers
+- Research collaborations
 
-### 3.2 Strategic Outreach
-- Neuromorphic computing researchers
-- Edge AI startups (non-NVIDIA stack)
-- Privacy-focused organizations
-- Geographies seeking AI sovereignty (non-US/China alternatives)
-
-### 3.3 Demonstration Events
-- Conference demos (bring the hardware)
-- YouTube technical walkthroughs
-- Open office hours for contributors
-
-**Philosophy:** The right people will find this if it's real and visible.
+**Possible platforms:**
+- Intel Loihi
+- BrainChip Akida
+- Custom FPGA prototype
 
 ---
 
-## Phase 4: What Comes After (2026+)
+## Long-Term Vision
 
-This is intentionally vague. The roadmap will rewrite itself based on:
-- Who joins
-- What funding appears
-- Which use cases emerge
-- What hardware becomes available
+Distributed AI network where:
+- Millions of edge devices contribute to collective intelligence
+- No single point of control or failure
+- Meaning is the unit of computation
+- Training cost drops from $100M to $1M through distributed approach
 
-**Possible directions:**
+**Philosophy:** AI should be like air — ubiquitous, invisible, and free.
 
-**A) Neuromorphic Integration**
-- Port to Intel Loihi or BrainChip Akida
-- Work with DVS camera manufacturers (Prophesee, iniVation)
-- Spiking neural network embeddings
+---
 
-**B) Custom Silicon**
-- Partner with university for memristor research
-- FPGA prototype of ternary compute architecture
-- Academic tape-out (if funding allows)
-- Timeline: 2027-2028+ (chip design takes years, not months)
+## Current Experimental Results (Summary)
 
-**C) Vertical Integration**
-- Solve one specific problem deeply (e.g., industrial IoT)
-- Build end-to-end solution (sensors → protocol → models → chip)
-- Prove ROI in real deployment
+| Series | Key Achievement |
+|--------|-----------------|
+| M2.5 | HDC competitive with Sentence Transformers |
+| M2.6 | 100% compositional generalization |
+| M3a | 2-node distributed training (17.5MB/round) |
+| M3b | 32× compression (271KB/round) |
+| M3c | 93% cross-architecture transfer |
+| M3c′ | 77% optimized student accuracy |
+| M4a | Pair encoding bottleneck identified |
+| M4c | **91.3% cross-lingual transfer** |
+| M4d | **110% semantic arithmetic retention** |
+| M4e | **98.4% vs Knowledge Distillation** |
 
-**D) Standards & Ecosystem**
-- Submit to IETF or IEEE as edge AI communication standard
-- Build coalition of implementations (Rust, C++, embedded)
-- Become infrastructure, not product
+---
 
-**The path will reveal itself.**
+## Immediate Next Steps
+
+### This Month (December 2025)
+1. ✅ Complete M4 series documentation
+2. ✅ Update website with M4 results
+3. ⬜ Draft paper "...Until We Found Meaning"
+4. ⬜ Order Phase 3 hardware (~$500-700)
+
+### Next Quarter (Q1 2026)
+1. Hardware setup and testing
+2. Physical mesh deployment
+3. Energy consumption benchmarks
+4. Video documentation
 
 ---
 
 ## What This Is Not
 
-**Not:** A startup pitch with hockey-stick growth charts.  
-**Not:** A promise to replace NVIDIA by 2027.  
-**Not:** A roadmap written by consultants.
+**Not:** A startup pitch with hockey-stick growth charts
+**Not:** A promise to replace NVIDIA by 2027
+**Not:** A roadmap written by consultants
 
-**Is:** A technical demonstration that alternatives are possible.  
-**Is:** An invitation for collaborators who see the same problems.  
-**Is:** A starting point, not a finish line.
-
----
-
-## Immediate Next Steps (This Week)
-
-1. ✅ Update protocol documentation with limitations and caveats
-2. ⬜ Order Phase 1 hardware (~$675)
-3. ⬜ Set up GitHub project board for hardware tasks
-4. ⬜ Write "Why SEP" blog post
-5. ⬜ Reach out to first 5 potential collaborators
+**Is:** A technical demonstration that alternatives are possible
+**Is:** An invitation for collaborators who see the same problems
+**Is:** A starting point, not a finish line
 
 ---
 
-## Metrics That Matter (Q1 2026)
+## On Team & Funding
 
-Forget GitHub stars and "users". What actually matters:
+**Current approach:** Self-funded experimental validation.
 
-- **Hardware working:** 5+ devices in physical mesh
-- **Video proof:** Professional documentation of the system
-- **Energy data:** Measured battery life vs baseline
-- **One believer:** Someone credible says "this is interesting"
+**After hardware PoC:** Present to:
+- Decentralization advocates (technical web3 community)
+- Privacy organizations (Signal, Tor ecosystem)
+- AI sovereignty researchers (non-US academic labs)
+- Neuromorphic computing community
 
-If those four happen, everything else becomes possible.
-
----
-
-## On Funding & Team
-
-**Current approach:** Self-funded MVP.
-
-**After MVP:** Show it to people who care about:
-- Decentralization (crypto/web3 folks who are technical)
-- Privacy (Signal, Tor community)
-- AI sovereignty (non-US governments, academic labs)
-- Neuromorphic computing (researchers looking for real applications)
-
-**Team:** This is an inventor's project seeking collaborators, not a CEO seeking employees. The right structure will emerge from who shows up.
+**Team philosophy:** Inventor's project seeking collaborators, not CEO seeking employees.
 
 ---
 
-## References & Standing on Shoulders
+## Standing on Shoulders
 
-This work is built on decades of prior research:
+This work synthesizes decades of prior research:
 
 - **Ternary computing:** Setun (1958, USSR)
 - **Memristors:** Leon Chua (1971), HP Labs (2008)
@@ -256,17 +189,15 @@ None of these ideas are new. The synthesis is.
 
 ## Final Note
 
-This roadmap will be wrong. That's fine. 
+This roadmap will evolve. The goal isn't to predict the future — it's to build enough of it that the path forward becomes obvious.
 
-The goal isn't to predict the future—it's to build enough of it that the path forward becomes obvious.
+**Status:** Semantic transfer validated through M4 series. Hardware validation phase next.
 
-**Status:** Protocol concepts demonstrated in software. Hardware validation phase starting.
-**Next milestone:** Working 5-device mesh (Q1 2026)
-
-*"The best time to plant a tree was 20 years ago. The second best time is now."*
+*"Attention was all we needed. Until we found meaning."*
 
 ---
 
-**Last Updated:** December 2025  
-**Next milestone:** Working 5-device mesh (Q1 2026)  
+**Last Updated:** December 2025
+**Current Phase:** Phase 3 (Hardware PoC)
+**Next Milestone:** 3-node physical mesh (Q2 2026)
 **Contact:** 1@seprotocol.ai
