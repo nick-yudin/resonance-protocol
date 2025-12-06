@@ -23,7 +23,6 @@
 - **M4c: Cross-Lingual Transfer** — 91.3% across 10 languages
 - **M4d: Semantic Compositionality** — 110% retention (ternary improves!)
 - **M4e: HDC vs Knowledge Distillation** — 98.4% competitive
-- **Paper:** "...Until We Found Meaning" (draft complete)
 
 **Key validation:** HDC captures universal meaning that transcends languages and survives extreme compression.
 
@@ -127,22 +126,6 @@ Distributed AI network where:
 | M4c | **91.3% cross-lingual transfer** |
 | M4d | **110% semantic arithmetic retention** |
 | M4e | **98.4% vs Knowledge Distillation** |
-
----
-
-## Immediate Next Steps
-
-### This Month (December 2025)
-1. ✅ Complete M4 series documentation
-2. ✅ Update website with M4 results
-3. ⬜ Draft paper "...Until We Found Meaning"
-4. ⬜ Order Phase 3 hardware (~$500-700)
-
-### Next Quarter (Q1 2026)
-1. Hardware setup and testing
-2. Physical mesh deployment
-3. Energy consumption benchmarks
-4. Video documentation
 
 ---
 
