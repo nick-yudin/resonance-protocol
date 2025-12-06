@@ -7,267 +7,189 @@ sidebar_position: 1
 
 # Level 0: The SEP Manifesto
 
-:::info Abstract
-Contemporary Artificial Intelligence is built on synchronous processing, clock cycles, global orchestration, and continuous computation. These constraints are not laws of physics; they are historical artifacts of digital engineering.
+## Abstract
 
-**The Semantic Event Protocol (SEP) proposes a different foundation.**
+The Semantic Event Protocol (SEP) explores an alternative approach to distributed AI: instead of transmitting model weights or raw data, nodes exchange compressed semantic representations. Instead of computing on clock cycles, devices compute when meaning changes.
 
-Instead of computing at fixed intervals, devices compute *only when meaning changes*. Instead of transmitting raw data, nodes exchange *semantic deltas*. Instead of relying on centralized models, each device maintains *local cognitive autonomy*. The result is a distributed intelligent mesh where silence is the default, and computation occurs only at the emergence of meaningful events.
-
-**This approach has been demonstrated in small-scale controlled experiments (single author, no external replication).** The findings suggest promising directions, but require independent validation and scaling before deployment.
-:::
+This document describes the philosophy, the approach, and the current state of experimental validation. We aim for honesty over hype: we share what works, what doesn't, and what remains unknown.
 
 ---
 
-## 1. Introduction
+## 1. The Problem
 
-Modern computing is time-driven: CPUs, GPUs, and TPUs execute operations every cycle regardless of information value. Neural networks recompute entire layers even when activations are silence-dominant. Sensors emit redundant frames. Distributed systems depend on periodic pings, heartbeats, and synchronization.
+Modern AI is centralized. Training a frontier model costs $100M+, requires thousands of GPUs, and concentrates capability in a few organizations. Inference depends on cloud APIs. Edge devices remain passive sensors, not intelligent participants.
 
-This architecture is incompatible with:
-* Planetary-scale edge intelligence
-* Privacy-by-default device ecosystems
-* Extreme energy constraints
-* Local-first autonomy
-* Responsive systems that awaken only to relevant change
+This creates:
+- **Dependency**: Entire industries rely on API access that can be revoked
+- **Inefficiency**: Raw data travels to datacenters for processing
+- **Fragility**: No connectivity means no intelligence
 
-The Semantic Event Protocol (SEP) proposes a different computation model based on one axiom: **intelligence emerges from changes in meaning, not from the passage of time.**
-
-**Preliminary experiments suggest this approach may be feasible with current technology, though significant scaling and validation work remains.**
+We ask: is there another way?
 
 ---
 
-## 2. Core Axiom
+## 2. The Hypothesis
 
-> **Intelligence is triggered by meaning, not by time.**
+What if intelligence could be distributed not by copying models, but by sharing meaning?
 
-Nodes do not compute because a clock ticks. Nodes compute because *something changes in the semantic space*.
+The core idea:
+- Large models understand meaning (semantic representations)
+- This meaning can be compressed into minimal form
+- Compressed meaning can be shared between nodes
+- Nodes can act on meaning locally, without the full model
 
-Computation becomes: **Event-driven, Semantic, Asynchronous, Distributed.**
-
-### The Paradigm Shift
-
-```mermaid
-sequenceDiagram
-    participant Clock as Time-Based (Old)
-    participant Meaning as Meaning-Based (New)
-
-    Note over Clock: Clock Tick (Compute)
-    Note over Meaning: Event: ΔMeaning
-
-    Note over Clock: Clock Tick (Compute)
-    Note over Meaning: ... Silence ...
-
-    Note over Clock: Clock Tick (Compute)
-    Note over Meaning: ... Silence ...
-
-    Note over Clock: Clock Tick (Compute)
-    Note over Meaning: Event: ΔMeaning
-```
+**This is a hypothesis under investigation, not a proven system.**
 
 ---
 
-## 3. The Breakthrough: Hyperdimensional Computing
+## 3. The Approach: Hyperdimensional Computing
 
-After extensive research spanning phases M2.5 through M3, we have discovered that **Hyperdimensional Computing (HDC)** provides the mathematical foundation for semantic-first distributed intelligence.
+We use Hyperdimensional Computing (HDC) as the foundation for semantic compression.
 
 ### What is HDC?
 
-HDC operates in ultra-high-dimensional spaces (10,000 dimensions) using ternary vectors {-1, 0, +1} with 70% sparsity. This enables:
+HDC represents information as high-dimensional vectors (thousands of dimensions) where:
+- Similar meanings have similar vectors
+- Vectors can be combined through simple arithmetic
+- Extreme quantization (ternary: {-1, 0, +1}) preserves semantic structure
 
-1. **Extreme Compression:** 32× compression (17.5MB → 271KB) while preserving semantic meaning
-2. **Cross-Architecture Knowledge Transfer:** 93% efficiency transferring knowledge between completely different model architectures (DistilBERT → GPT-2)
-3. **Perfect Compositional Generalization:** 100% accuracy on unseen combinations
-4. **Efficient Distributed Training:** Multi-node synchronization via semantic packets
+### Why HDC?
 
-### Why HDC Works for SEP
-
-```mermaid
-graph LR
-    A[Raw Neural<br/>Network State] -->|HDC Encoding| B[10,000-d<br/>Ternary Vector]
-    B -->|Compression| C[271 KB<br/>Semantic Packet]
-    C -->|Network| D[Remote Node]
-    D -->|Decoding| E[Semantic<br/>Knowledge]
-
-    style B fill:#ff4d00,stroke:#ff4d00,color:#000
-    style C fill:#ff4d00,stroke:#ff4d00,color:#000
-```
-
-HDC provides five critical properties:
-
-1. **Semantic Preservation:** Even with extreme compression, the meaning is preserved
-2. **Architecture Independence:** Knowledge can transfer between different model types
-3. **Composability:** Semantic vectors can be combined algebraically to create new meanings
-4. **Cross-Lingual Universality:** 91% transfer efficiency across 10 typologically diverse languages. Train on English, deploy on Chinese, Arabic, Hindi. Meaning transcends language boundaries.
-5. **Semantic Arithmetic Preservation:** 110% retention on word analogies (king - man + woman = queen). Remarkably, ternary quantization *improves* compositional reasoning compared to original float embeddings.
+1. **Compression**: Ternary vectors are 32x smaller than float32
+2. **Composability**: Vectors can be added, subtracted, compared
+3. **Hardware efficiency**: Ternary operations need only XOR and popcount
+4. **Noise tolerance**: High dimensionality provides redundancy
 
 ---
 
-## 4. Protocol Invariants
+## 4. Core Principles
 
-### Invariant 1: Silence is the Default State
-Nodes remain inactive unless a semantic event occurs. No periodic heartbeats are required at the semantic level. Silence is meaningful and expected.
+### Principle 1: Silence is Default
 
-**Demonstrated in controlled experiments:** HDC compression reduced synchronization traffic from 17.5MB to 271KB per round in our 2-node test setup.
+Nodes do not transmit unless meaning changes. No heartbeats, no polling, no redundant data. Silence is the normal state.
 
-### Invariant 2: Events Carry Meaning, Not Raw Data
-The fundamental unit is the **Semantic Event**:
+### Principle 2: Meaning Over Data
 
-```
-E = (context, Δmeaning, confidence, provenance)
-```
+Nodes exchange semantic representations, not raw inputs. A camera doesn't send pixels; it sends "person walking left" as a vector.
 
-Events communicate change in semantic space, not raw sensor outputs or model states.
+### Principle 3: Local Autonomy
 
-**Observed in our benchmarks:** HDC semantic packets achieved 93% cross-architecture knowledge transfer efficiency on SST-2 sentiment task.
+Each node maintains its own understanding. No central coordinator required. Nodes can operate independently and sync when connected.
 
-### Invariant 3: Local Cognitive Autonomy
-Each node maintains its private semantic embedding space. Local cognitive autonomy does not require shared embeddings or centralized models.
+### Principle 4: Threshold-Based Communication
 
-**Demonstrated:** Ternary HDC encoders operated locally with 70% sparsity in our experiments, suggesting potential for device-level autonomy.
-
-### Invariant 4: Semantic Distance and Threshold
-A semantic event MUST be emitted when the distance *d* between the current state and the last transmitted state exceeds a threshold *θ*:
+A node transmits only when semantic distance from last transmission exceeds a threshold:
 
 ```
-d(M_t, M_{t-1}) > θ
+if cosine_distance(current_vector, last_vector) > threshold:
+    transmit()
+else:
+    remain_silent()
 ```
-
-**Observed:** HDC clustering achieved 4.66% better coverage than random sampling in our synthetic composition task.
-
-### Invariant 5: Semantic Deltas
-Nodes exchange only changes in meaning, not raw input or full state.
-
-**Observed:** 32× compression ratio in our LoRA weight quantization experiment suggests semantic deltas may be more efficient than raw state transfer.
-
-### Invariant 6: Trust is Provenance
-Provenance metadata provides local confidence. There is no global root of trust (Authority).
-
-**Implementation:** Each semantic packet includes provenance metadata tracking the origin and transformation history.
 
 ---
 
-## 5. The SEP Stack
+## 5. What We Have Tested
 
-The architecture is layered to separate physical sensing from cognitive reasoning.
+All experiments conducted by single author in controlled settings. Results require independent replication and broader validation before any production use.
 
-```mermaid
-graph TD
-    L5[L5: Collective Cognition] --- L4
-    L4[L4: Semantic Sharing P2P] --- L3
-    L3[L3: Semantic Compression HDC] --- L2
-    L2[L2: Local Cognition] --- L1
-    L1[L1: Local Semantics HDC] --- L0
-    L0[L0: Sensory Events]
+### Semantic Transfer (M4 Series)
 
-    style L5 fill:#1a1a1a,stroke:#ff4d00,color:#fff
-    style L4 fill:#222,stroke:#333,color:#ddd
-    style L3 fill:#ff4d00,stroke:#ff4d00,color:#000
-    style L2 fill:#222,stroke:#333,color:#ddd
-    style L1 fill:#ff4d00,stroke:#ff4d00,color:#000
-    style L0 fill:#333,stroke:#333,color:#bbb
-```
+**M4c: Cross-Lingual Transfer**
+- Setup: Train classifier on English XNLI (10K examples), test on 10 languages
+- Result: 91.3% transfer ratio
+- Languages: German, French, Spanish, Russian, Chinese, Arabic, Bulgarian, Hindi, Vietnamese
+- Interpretation: Suggests HDC captures language-agnostic meaning
 
-**New in this revision:** Layers L1 and L3 now explicitly use HDC for semantic encoding and compression, based on proven experimental results.
+**M4d: Semantic Compositionality**
+- Setup: Test word analogies (king - man + woman = queen) in ternary HDC
+- Result: 110% retention (ternary outperforms original float embeddings)
+- Interpretation: Quantization may act as regularization
 
----
+**M4e: Comparison with Knowledge Distillation**
+- Setup: Compare HDC transfer vs standard KD on SST-2
+- Result: HDC achieves 98.4% of KD accuracy (87.3% vs 88.6%)
+- Interpretation: HDC competitive while providing unique properties
 
-## 6. Semantic Event Lifecycle
+### Distributed Training (M3 Series)
 
-The lifecycle of information in the system follows a strict reduction path:
+**M3b: HDC Compression**
+- Setup: 2-node distributed training with HDC-compressed sync
+- Result: 32x compression (17.5 MB to 271 KB)
+- Limitation: 2 nodes only, single task
 
-```mermaid
-flowchart LR
-    Sens((Δs)) -->|Sensory| Sem((Δσ))
-    Sem -->|HDC Encode| Cog((Δμ))
-    Cog -->|Cognitive| Ev((E))
-    Ev -->|Compress| Share((E↑))
+**M3c: Cross-Architecture Transfer**
+- Setup: Transfer from DistilBERT to GPT-2 via HDC
+- Result: 93% transfer efficiency on SST-2
+- Limitation: Single task, simple classification
 
-    style Sens stroke:#ff4d00
-    style Cog fill:#ff4d00,stroke:#ff4d00,color:#000
-    style Share stroke:#ff4d00,fill:#ff4d00,color:#000
-```
+### Earlier Experiments (M2 Series)
 
-1.  **Sensory Change (Δs):** Detected by DVS/Audio.
-2.  **Semantic Shift (Δσ):** Crossing the threshold.
-3.  **HDC Encoding (Δμ):** 10,000-d ternary vector encoding.
-4.  **Event Creation (E):** Packaging the delta with provenance.
-5.  **Compression & Sharing (E↑):** 32× compression and propagation to the mesh.
+**M2.6: Compositional Generalization**
+- Setup: Test on unseen attribute-object combinations
+- Result: 100% accuracy on synthetic task
+- Limitation: Toy dataset, not natural language
 
 ---
 
-## 7. Topology: The Quiet Mesh
+## 6. What We Have Not Tested
 
-The network topology is dynamic and sparse. Nodes form a mesh where connections are maintained, but **traffic is zero** until a meaningful event propagates.
+Transparency about limitations:
 
-```mermaid
-graph TD
-    A((Node A)) -.-> B((Node B))
-    B -.-> C((Node C))
-    A -.-> D((Node D))
-    D -.-> E((Node E))
-    E -.-> C
-
-    %% Semantic Event Propagation
-    A == 271 KB HDC ==> B
-    D == 271 KB HDC ==> E
-
-    style A stroke:#ff4d00,stroke-width:2px
-    style B stroke:#ff4d00,stroke-width:2px
-    style E stroke:#ff4d00,stroke-width:2px
-
-    linkStyle 5,6 stroke:#ff4d00,stroke-width:2px,color:#ff4d00
-```
-
-**Demonstrated:** In our 2-node setup, distributed training converged with 271KB per synchronization round.
+- **Scale**: Maximum 2-10 nodes in experiments, not hundreds or thousands
+- **Hardware**: All experiments on standard GPUs, no edge device validation
+- **Real-world tasks**: Mostly classification benchmarks, not production workloads
+- **Latency**: No systematic measurement of real-time performance
+- **Failure modes**: Limited adversarial or stress testing
+- **Security**: No formal security analysis
+- **Long-term stability**: No experiments beyond hours of runtime
 
 ---
 
-## 8. Experimental Validation
+## 7. The Vision (Unvalidated)
 
-The SEP is not a theoretical exercise. Every core claim has been validated through systematic experimentation:
+If the experimental findings generalize, SEP could enable:
 
-### M2.5 Series: Data Efficiency
-- **M2.5a:** HDC-based data curation competitive with Sentence Transformers
-- **M2.5b:** Curriculum learning: HDC-guided sharp curriculum achieves 100% accuracy
+**Edge Intelligence**
+Devices that understand locally, share meaning efficiently, operate without constant connectivity.
 
-### M2.6: Compositional Generalization
-- **Result:** 100% accuracy on unseen attribute combinations
-- **Significance:** HDC enables perfect compositional reasoning
+**Mesh Networks**
+Swarms of nodes that collectively know more than any individual, learning from each other through semantic exchange.
 
-### M3 Series: Distributed Intelligence
-- **M3a:** Raw distributed training (2 nodes, 17.5MB/round)
-- **M3b:** HDC compression (32× reduction to 271KB/round)
-- **M3c′:** Cross-architecture knowledge transfer (93% efficiency, DistilBERT → GPT-2)
+**Decentralized AI**
+Intelligence that no single entity controls, emerging from the collaboration of many autonomous nodes.
 
-### M4 Series: Semantic Transfer
-- **M4c:** Cross-lingual transfer — 91.3% accuracy retention across 10 languages (English → German, French, Spanish, Russian, Chinese, Arabic, Bulgarian, Hindi, Vietnamese)
-- **M4d:** Semantic compositionality — 110% retention on word analogies, ternary improves over float
-- **M4e:** Comparison with Knowledge Distillation — 98.4% of KD accuracy with unique properties KD cannot provide
+**This vision is speculative. The experiments show early promising signals, not a working system.**
 
-**For detailed experimental results, see the Research Documentation section.**
+---
+
+## 8. How to Participate
+
+SEP is open research. We invite:
+
+- **Replication**: Run our experiments, verify or challenge results
+- **Extension**: Test on new tasks, larger scales, different domains
+- **Criticism**: Find flaws, identify limitations, improve the approach
+- **Application**: Explore real-world use cases
+
+All code and data: [github.com/nick-yudin/SEP](https://github.com/nick-yudin/SEP)
 
 ---
 
 ## 9. Conclusion
 
-The Semantic Event Protocol (SEP) proposes a semantic-first, event-driven architecture for distributed intelligence.
+SEP proposes that meaning—not weights, not data—could be the unit of distributed intelligence.
 
-**What we have demonstrated in controlled, small-scale experiments:**
-- 32× compression of LoRA weights via ternary HDC quantization (2-node setup, SST-2 task)
-- 93% cross-architecture knowledge transfer efficiency (DistilBERT → GPT-2, SST-2 sentiment)
-- 91.3% cross-lingual transfer (train English, test 10 languages including Chinese, Arabic, Hindi)
-- 110% semantic arithmetic retention (ternary improves compositionality)
-- 98.4% of Knowledge Distillation accuracy with additional unique properties
-- 100% compositional generalization (synthetic attribute-object task, HDC vs 21% for small transformer)
-- Distributed training convergence via 271KB semantic packets (2 nodes, Alpaca subset)
+Early experiments suggest:
+- Semantic representations survive 32x compression
+- Meaning transfers across languages (91%) and architectures (93%)
+- Ternary quantization preserves and sometimes improves semantic structure
+- HDC is competitive with standard approaches while enabling unique properties
 
-**Limitations:**
-- Single author, no external replication
-- Synthetic or narrow datasets (SST-2, small Alpaca subset, toy composition tasks)
-- Small scale (2-10 nodes in simulation, not production edge devices)
-- No validation on real-world safety-critical systems
-- No hardware proof-of-concept for neuromorphic/memristor integration
+These are preliminary findings from controlled experiments. Significant work remains before any real-world deployment.
 
-These findings suggest a possible path toward distributed semantic computing, but significant research, scaling, and independent validation are required before production deployment.
+We share this work not as a solution, but as a direction worth exploring.
 
-**Semantic events instead of clock cycles.**
+---
+
+*Questions, criticism, collaboration: 1@seprotocol.ai*

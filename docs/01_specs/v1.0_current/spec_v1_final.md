@@ -7,319 +7,298 @@ slug: /specs/v1.0_current/spec-v1-final
 
 # Semantic Event Protocol (SEP) — Level 1 Specification
 
-**Protocol Name:** Semantic Event Protocol (SEP)
-**Version:** 1.1.0 (Ironclad + HDC)
-**Status:** Alpha reference implementation (Python)
+**Version:** 2.0.0
+**Status:** Experimental (not production-ready)
 **Date:** December 2025
 
 ---
 
 ## 1. Introduction
 
-This document defines the technical standard for the **Semantic Event Protocol (SEP) Level 1**. Any node compliant with this specification can join the mesh, filter noise, and exchange semantic events, regardless of the underlying hardware or programming language.
+This document defines the technical specification for SEP Level 1. It describes how nodes encode, compress, and exchange semantic information.
 
-**This specification is built on Hyperdimensional Computing (HDC)**, demonstrated in small-scale experiments for semantic compression and cross-architecture knowledge transfer.
-
----
-
-## 2. The Semantic Layer: HDC Foundation
-
-### 2.1. Vector Space Architecture
-
-All nodes must use **Hyperdimensional Computing (HDC)** for semantic encoding:
-
-- **Dimensions ($D$):** 10,000
-- **Value Space:** Ternary {-1, 0, +1}
-- **Sparsity:** 70% (exactly 7,000 zeros per vector)
-- **Encoding:** 2-bit packing for efficient storage
-
-**Rationale:** HDC provides extreme compression (32× in proven experiments) while preserving semantic meaning and enabling cross-architecture knowledge transfer.
-
-### 2.2. HDC Encoding Process
-
-```mermaid
-graph LR
-    A[Text Input] -->|Tokenize| B[Token IDs]
-    B -->|Random Projection| C[10,000-d Vector]
-    C -->|Ternary Quantization| D[HDC Vector]
-    D -->|2-bit Packing| E[Compressed Storage]
-
-    style D fill:#ff4d00,stroke:#ff4d00,color:#000
-    style E fill:#ff4d00,stroke:#ff4d00,color:#000
-```
-
-**Step-by-step:**
-
-1. **Tokenization:** Input text → token IDs (vocabulary-based)
-2. **Random Projection:** Each token gets a random 10,000-d vector (seeded, reproducible)
-3. **Aggregation:** Sum token vectors (mean pooling)
-4. **Ternary Quantization:** Apply threshold to create {-1, 0, +1} values
-   ```
-   x_ternary = {
-      -1  if x < -threshold
-       0  if |x| ≤ threshold
-      +1  if x > threshold
-   }
-   ```
-5. **Sparsity Enforcement:** Ensure exactly 70% zeros (adjust threshold dynamically)
-6. **2-bit Packing:** Compress for storage/transmission
-
-### 2.3. The Silence Mechanism
-
-Nodes calculate the **Cosine Distance** between the current HDC vector ($v_t$) and the last transmitted vector ($v_{t-1}$):
-
-$$
-d = 1 - \frac{v_t \cdot v_{t-1}}{\|v_t\| \|v_{t-1}\|}
-$$
-
-- **Threshold ($\theta$):** **0.35** (calibrated from experiments)
-- **Logic:**
-```
-  IF d < 0.35: DROP packet (Noise/Synonym). Update internal state only.
-  IF d >= 0.35: TRANSMIT Event (Significant Semantic Shift).
-```
-
-**Proven:** This threshold achieves optimal balance between information preservation and bandwidth efficiency.
+**Important**: This specification is based on small-scale experiments. It has not been validated at production scale or on real edge hardware. Implementations should be considered experimental.
 
 ---
 
-## 3. The Compression Layer
+## 2. Semantic Encoding
 
-### 3.1. Semantic Packet Format
+### 2.1 Vector Space
 
-HDC vectors are transmitted as **compressed semantic packets**:
+Semantic content is encoded as Hyperdimensional Computing (HDC) vectors:
 
-**Original Size:** 10,000 dimensions × 32 bits = 320,000 bits = 40 KB (uncompressed)
-**With 2-bit packing:** 10,000 × 2 bits = 20,000 bits = 2.5 KB
-**With sparse encoding:** ~1.5 KB (encode only non-zero positions)
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| Dimensions | 4096 | Configurable, tested range: 4096-16384 |
+| Values | Ternary {-1, 0, +1} | 2 bits per dimension |
+| Sparsity | ~60-70% zeros | Achieved via threshold quantization |
 
-**Proven Result:** In multi-node distributed training, full model state (17.5 MB) compressed to **271 KB** using HDC encoding.
+### 2.2 Encoding Pipeline
 
-### 3.2. Compression Algorithm
+```
+Input Text
+    ↓
+Sentence Encoder (e.g., all-mpnet-base-v2)
+    ↓
+Float Embedding (768d)
+    ↓
+Random Projection (768d → 4096d)
+    ↓
+Ternary Quantization
+    ↓
+HDC Vector (4096d ternary)
+```
+
+### 2.3 Random Projection
+
+Project float embeddings to HDC space:
 
 ```python
-def compress_hdc_vector(hdc_vec):
-    """
-    Compress ternary HDC vector for transmission.
+# Initialize once per network (shared seed)
+projection_matrix = random_normal(768, 4096, seed=NETWORK_SEED)
+projection_matrix /= norm(projection_matrix, axis=0)
 
-    Args:
-        hdc_vec: np.array of shape (10000,) with values {-1, 0, +1}
-
-    Returns:
-        compressed: bytes (sparse format)
-    """
-    # Extract non-zero positions and values
-    nonzero_indices = np.where(hdc_vec != 0)[0]
-    nonzero_values = hdc_vec[nonzero_indices]
-
-    # Pack: [num_nonzero (2 bytes)] + [indices (2 bytes each)] + [values (2-bit packed)]
-    return pack_sparse(nonzero_indices, nonzero_values)
+# Project
+hdc_float = embedding @ projection_matrix
 ```
+
+The Johnson-Lindenstrauss lemma provides theoretical justification: random projections preserve pairwise distances with high probability.
+
+### 2.4 Ternary Quantization
+
+Convert float HDC to ternary:
+
+```python
+def quantize(hdc_float):
+    threshold = 0.3 * std(hdc_float)
+    result = zeros_like(hdc_float)
+    result[hdc_float > threshold] = +1
+    result[hdc_float < -threshold] = -1
+    return result  # {-1, 0, +1}
+```
+
+Threshold 0.3 * std found empirically. Different values may work better for specific applications.
 
 ---
 
-## 4. The Alignment Layer (Cross-Architecture)
+## 3. Semantic Distance
 
-### 4.1. Cross-Architecture Knowledge Transfer
+### 3.1 Distance Metric
 
-**Breakthrough:** HDC enables 93% efficient knowledge transfer between completely different architectures (e.g., DistilBERT → GPT-2).
+Cosine distance between HDC vectors:
 
-**Protocol:**
-
-1. **Sender (e.g., DistilBERT):**
-   - Encodes knowledge in HDC space (10,000-d ternary)
-   - Transmits compressed semantic packet
-
-2. **Receiver (e.g., GPT-2):**
-   - Decodes HDC packet
-   - Projects into local embedding space
-   - Fine-tunes using decoded semantic knowledge
-
-**Key Property:** HDC space is **architecture-agnostic**. The same semantic packet can be interpreted by models with completely different internal architectures.
-
-### 4.2. Semantic Alignment Protocol
-
-For nodes with different internal representations:
-
-```mermaid
-sequenceDiagram
-    participant S as Sender (DistilBERT)
-    participant H as HDC Space
-    participant R as Receiver (GPT-2)
-
-    S->>H: Encode knowledge (10,000-d ternary)
-    H->>H: Compress (271 KB)
-    H->>R: Transmit semantic packet
-    R->>R: Decode HDC vector
-    R->>R: Project to local space
-    R->>R: Fine-tune (93% transfer efficiency)
+```python
+def semantic_distance(v1, v2):
+    similarity = dot(v1, v2) / (norm(v1) * norm(v2))
+    return 1 - similarity
 ```
 
-**No Procrustes required:** HDC provides a universal semantic space that doesn't require pairwise alignment.
+### 3.2 Transmission Threshold
+
+Node transmits when distance exceeds threshold:
+
+```python
+THRESHOLD = 0.35  # Empirically determined
+
+if semantic_distance(current, last_transmitted) > THRESHOLD:
+    transmit(current)
+    last_transmitted = current
+else:
+    remain_silent()
+```
+
+Threshold 0.35 balances information preservation vs bandwidth. Applications may tune this value.
 
 ---
 
-## 5. The Transport Layer
+## 4. Wire Format
 
-### 5.1. Wire Format
+### 4.1 Semantic Event
 
-Data is serialized using **Protocol Buffers v3**.
-
-**`resonance.proto` definition (updated):**
 ```protobuf
 syntax = "proto3";
-package resonance;
+package sep;
 
 message SemanticEvent {
-  string source_id = 1;          // UUID of the emitter (8 chars)
-  int64 created_at = 2;          // Unix Timestamp
-  bytes hdc_vector = 3;          // Compressed HDC vector (sparse format)
-  int32 hdc_dim = 4;             // HDC dimensionality (10000)
-  float sparsity = 5;            // Sparsity level (0.7)
-  string debug_label = 6;        // Optional text (e.g., "Fire detected")
-  int32 ttl = 7;                 // Time To Live (default: 3 hops)
-  map<string, string> provenance = 8;  // Provenance metadata
+    string node_id = 1;           // Source node identifier
+    int64 timestamp = 2;          // Unix timestamp (ms)
+    bytes hdc_vector = 3;         // Compressed ternary vector
+    uint32 dimensions = 4;        // HDC dimensionality
+    uint32 ttl = 5;               // Time-to-live (hops)
+    string label = 6;             // Optional human-readable label
+    map<string, string> meta = 7; // Optional metadata
 }
 ```
 
-### 5.2. Stream Framing (TCP)
+### 4.2 Vector Compression
 
-- **Prefix:** 4 bytes (Unsigned Integer, Big-Endian) representing the payload length
-- **Payload:** The binary Protobuf data
-- **Compression:** HDC vectors pre-compressed using sparse encoding
-
-**Proven:** Average packet size in distributed training: **271 KB** (vs. 17.5 MB raw)
-
----
-
-## 6. Network Behavior (Gossip)
-
-### 6.1. Topology
-
-- **Type:** Mesh (Ad-hoc, P2P)
-- **Echo Suppression:** Nodes maintain a `memory` cache of recently seen `event_id`s
-- **Semantic Routing:** Nodes MAY drop packets if semantic distance < $\theta$
-
-### 6.2. Semantic Deduplication
+Ternary vectors compressed using sparse encoding:
 
 ```python
-def should_propagate(event, local_knowledge):
-    """
-    Decide whether to propagate event based on semantic distance.
+def compress(hdc_ternary):
+    # Store only non-zero positions and values
+    nonzero_idx = where(hdc_ternary != 0)
+    nonzero_val = hdc_ternary[nonzero_idx]
 
-    Args:
-        event: Incoming semantic event with HDC vector
-        local_knowledge: Node's current HDC knowledge state
+    # Pack: 2 bytes per index, 1 bit per value sign
+    return pack(nonzero_idx, nonzero_val)
 
-    Returns:
-        bool: True if event is semantically novel
-    """
-    distance = cosine_distance(event.hdc_vector, local_knowledge)
-    return distance >= THRESHOLD  # 0.35
+def decompress(packed, dimensions):
+    nonzero_idx, nonzero_val = unpack(packed)
+    result = zeros(dimensions)
+    result[nonzero_idx] = nonzero_val
+    return result
 ```
 
-**Result:** Network traffic reduced by 32× compared to raw parameter synchronization.
+Typical compression: 4096d ternary → ~1.5 KB (vs 16 KB uncompressed, vs 3 KB float32 original)
+
+### 4.3 Transport
+
+TCP with length-prefix framing:
+
+```
+[4 bytes: payload length (big-endian uint32)]
+[N bytes: protobuf payload]
+```
 
 ---
 
-## 7. Experimental Validation
+## 5. Network Behavior
 
-This specification is not theoretical. Every component has been experimentally validated:
+### 5.1 Topology
 
-### 7.1. Compression Efficiency
-- **Experiment:** M3b (HDC Compression for Distributed Training)
-- **Result:** 32× compression (17.5 MB → 271 KB)
-- **Conclusion:** HDC enables extreme compression while preserving semantic meaning
+Mesh network with gossip protocol. No central coordinator.
 
-### 7.2. Cross-Architecture Transfer
-- **Experiment:** M3c′ (DistilBERT → GPT-2 knowledge transfer)
-- **Result:** 93% transfer efficiency
-- **Conclusion:** HDC provides architecture-agnostic semantic representation
+### 5.2 Event Propagation
 
-### 7.3. Compositional Generalization
-- **Experiment:** M2.6 (Unseen attribute combinations)
-- **Result:** 100% accuracy on unseen combinations
-- **Conclusion:** HDC enables perfect compositional reasoning
+```python
+def on_receive(event):
+    # Deduplicate
+    if event.node_id + event.timestamp in seen_cache:
+        return
+    seen_cache.add(event.node_id + event.timestamp)
 
-### 7.4. Data Curation
-- **Experiment:** M2.5a (HDC vs. Sentence Transformers)
-- **Result:** HDC competitive with ST (4.66% better coverage)
-- **Conclusion:** HDC suitable for semantic distance calculations
+    # Check TTL
+    if event.ttl <= 0:
+        return
 
-### 7.5. Cross-Lingual Transfer
-- **Experiment:** M4c (Train English XNLI, test 10 languages)
-- **Result:** 91.3% transfer ratio
-- **Languages:** German (95.1%), French (93.5%), Spanish (96.9%), Russian (89.2%), Chinese (91.7%), Arabic (87.3%), Bulgarian (92.0%), Hindi (84.6%), Vietnamese (91.4%)
-- **Conclusion:** HDC representations are language-agnostic; meaning transfers without retraining
+    # Process locally
+    process(event)
 
-### 7.6. Semantic Compositionality
-- **Experiment:** M4d (Word analogies: king - man + woman = queen)
-- **Result:** 110% of original embedding performance (75% vs 67% top-1 accuracy)
-- **Conclusion:** Ternary quantization acts as regularization, improving semantic structure
+    # Propagate to neighbors
+    event.ttl -= 1
+    for neighbor in neighbors:
+        send(neighbor, event)
+```
 
-### 7.7. Comparison with Knowledge Distillation
-- **Experiment:** M4e (HDC Transfer vs Standard KD on SST-2)
-- **Result:** HDC achieves 98.4% of KD accuracy (87.3% vs 88.6%)
-- **Unique HDC properties:** Cross-lingual transfer, semantic arithmetic, 32× compression
-- **Conclusion:** HDC competitive with standard methods while enabling capabilities KD cannot provide
+### 5.3 Semantic Deduplication (Optional)
 
----
+Nodes may drop semantically redundant events:
 
-## 8. Reference Implementation
-
-The official Python implementation of this spec is available in:
-`/reference_impl/python/hdc`
-
-**Key modules:**
-- `ternary_encoder.py`: HDC encoding with ternary quantization
-- `data_curator.py`: HDC-based data curation and clustering
-- `distributed_trainer.py`: Multi-node training with HDC compression
-- `knowledge_transfer.py`: Cross-architecture knowledge transfer
-
-**All experiments reproducible with provided scripts.**
+```python
+def should_propagate(event):
+    for recent in recent_events:
+        if semantic_distance(event.vector, recent.vector) < THRESHOLD:
+            return False  # Too similar to recent event
+    return True
+```
 
 ---
 
-## 9. Compliance Requirements
+## 6. Experimental Results
 
-A SEP Level 1 node MUST:
+Results from controlled experiments. All require independent replication.
 
-1. ✅ Encode all semantic data using 10,000-d ternary HDC vectors
-2. ✅ Enforce 70% sparsity in HDC representations
-3. ✅ Use 2-bit packing for storage/transmission
-4. ✅ Calculate semantic distance using cosine distance
-5. ✅ Apply 0.35 threshold for noise filtering
-6. ✅ Compress semantic packets using sparse encoding
-7. ✅ Support Protocol Buffers v3 wire format
-8. ✅ Implement echo suppression (event_id cache)
-9. ✅ Include provenance metadata in all events
-10. ✅ Remain silent unless semantic distance exceeds threshold
+### 6.1 Semantic Transfer
 
-**Optional but recommended:**
-- Support cross-architecture knowledge decoding
-- Implement semantic routing (drop redundant packets)
-- Use TTL-based propagation control
+| Experiment | Setup | Result | Limitations |
+|------------|-------|--------|-------------|
+| M4c Cross-Lingual | Train EN, test 10 langs | 91.3% transfer | Single task (XNLI) |
+| M4d Compositionality | Word analogies | 110% of baseline | 12 analogies, 71 words |
+| M4e vs KD | SST-2 sentiment | 98.4% of KD | Single task |
+
+### 6.2 Compression
+
+| Experiment | Setup | Result | Limitations |
+|------------|-------|--------|-------------|
+| M3b HDC Compression | 2-node training | 32x compression | 2 nodes only |
+| Ternary vs Float | Storage | 32x smaller | No speed benchmark |
+
+### 6.3 Cross-Architecture
+
+| Experiment | Setup | Result | Limitations |
+|------------|-------|--------|-------------|
+| M3c DistilBERT→GPT-2 | SST-2 transfer | 93% efficiency | Single task |
 
 ---
 
-## 10. Performance Benchmarks
+## 7. Reference Implementation
 
-**Expected performance for compliant nodes:**
+Python reference: [github.com/nick-yudin/SEP](https://github.com/nick-yudin/SEP)
 
-| Metric | Target | Proven |
-|--------|--------|--------|
-| Compression Ratio | ≥ 20× | 32× ✅ |
-| Encoding Speed | ≥ 100 samples/sec | 120 samples/sec ✅ |
-| Memory Footprint | ≤ 5 MB per node | 3.2 MB ✅ |
-| Network Bandwidth | ≤ 500 KB/sync | 271 KB ✅ |
-| Cross-Arch Transfer | ≥ 80% efficiency | 93% ✅ |
+Key modules:
+- `hdc_encoder.py`: Encoding pipeline
+- `semantic_event.py`: Event handling
+- `gossip.py`: Network protocol
+
+**Status**: Reference implementation for experimentation. Not optimized for production.
+
+---
+
+## 8. Compliance
+
+A SEP Level 1 node SHOULD:
+
+1. Use ternary HDC vectors for semantic encoding
+2. Apply cosine distance for similarity
+3. Implement threshold-based transmission
+4. Support protobuf wire format
+5. Implement TTL-based propagation
+6. Maintain seen-event cache for deduplication
+
+A SEP Level 1 node MAY:
+
+- Use different HDC dimensions (recommended: 4096-16384)
+- Adjust threshold based on application needs
+- Implement semantic deduplication
+- Add application-specific metadata
+
+---
+
+## 9. Known Limitations
+
+This specification has not been validated for:
+
+- Networks larger than 10 nodes
+- Real edge hardware (Raspberry Pi, Jetson, microcontrollers)
+- Real-time latency requirements
+- Adversarial environments
+- Long-running stability (>24 hours)
+- Tasks beyond text classification
+
+These limitations should be addressed before production deployment.
+
+---
+
+## 10. Future Work
+
+Areas requiring further research:
+
+- **Scale**: Test with 100+ nodes
+- **Hardware**: Validate on actual edge devices
+- **Tasks**: Extend beyond classification (retrieval, generation)
+- **Security**: Formal threat modeling
+- **Performance**: Systematic latency/throughput benchmarks
 
 ---
 
 ## 11. Conclusion
 
-SEP Level 1 specification provides a complete, experimentally validated standard for semantic-first distributed intelligence based on Hyperdimensional Computing.
+SEP Level 1 provides a foundation for semantic-first distributed communication. The specification is based on promising experimental results but remains unvalidated at scale.
 
-**This is proven technology, not speculation.**
+We release this as a starting point for research, not as a production standard.
 
-Every claim in this specification is backed by experimental results from phases M2.5 through M3c′.
+---
+
+*Feedback: 1@seprotocol.ai*
+*Code: github.com/nick-yudin/SEP*
