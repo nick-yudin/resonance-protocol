@@ -34,3 +34,12 @@ m3*_node_*.png
 # Firebase credentials
 *firebase*.json
 *credentials*.json
+
+# --------------------
+# PAPERS (PRIVATE DRAFTS)
+# --------------------
+# Exclude papers/ (work in progress, not ready for public)
+papers/
+
+# Include papers_experiments/ (experimental code for papers)
+!papers_experiments/
