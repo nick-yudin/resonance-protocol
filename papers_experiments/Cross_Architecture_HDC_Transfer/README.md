@@ -2,7 +2,7 @@
 
 Experimental validation of Hyperdimensional Computing (HDC) for transferring learned representations between different neural network architectures.
 
-**Published:** [Zenodo (2025)](https://zenodo.org/records/18009693) | **Paper Source:** [LaTeX & PDF](../../papers/Cross_Architecture_HDC_Transfer/)
+**Published:** [Zenodo (2025)](https://zenodo.org/records/18009693) | **Paper PDF:** [Cross_Architecture_HDC_Transfer.pdf](../../papers/Cross_Architecture_HDC_Transfer/Cross_Architecture_HDC_Transfer.pdf)
 
 ## Overview
 

@@ -76,20 +76,22 @@ Contains all Markdown documentation that is published via Docusaurus.
 
 ### 2. `/papers` (Published Papers)
 
-Contains LaTeX sources, PDFs, and figures for published academic papers.
+Contains final PDF versions of published academic papers. LaTeX sources and working files are kept locally but not committed to the repository.
 
 | Folder | Description | Status |
 |--------|-------------|--------|
 | `Cross_Architecture_HDC_Transfer/` | Paper on cross-architecture knowledge transfer via HDC | Published on [Zenodo](https://zenodo.org/records/18009693) |
 
-**Structure:**
-- `main.tex` - LaTeX source
-- `*.pdf` - Compiled PDF
-- `*.png`, `*.jpg` - Figures and diagrams
-- `references.bib` - Bibliography
-- `generate_figures.py` - Script to generate figures from experimental data
+**What's included in git:**
+- `*.pdf` - Final compiled PDFs only
 
-**Note:** Temporary LaTeX build files (`*.aux`, `*.log`, etc.) are excluded via `.gitignore`.
+**What's excluded (local only):**
+- LaTeX sources (`*.tex`, `*.bib`)
+- Figures and diagrams (`*.png`, `*.jpg`)
+- Build scripts (`generate_figures.py`)
+- Temporary build files (`*.aux`, `*.log`, etc.)
+
+**Rationale:** We publish final papers on Zenodo and include PDFs in the repository for easy access. LaTeX sources remain private during the writing process.
 
 ### 3. `/papers_experiments` (Reproducible Experiments for Papers)
 

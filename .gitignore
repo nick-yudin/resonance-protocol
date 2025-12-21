@@ -38,16 +38,11 @@ m3*_node_*.png
 # --------------------
 # PAPERS
 # --------------------
-# Include papers/ folder with LaTeX sources and PDFs
-# Exclude temporary LaTeX build files
-papers/**/*.aux
-papers/**/*.log
-papers/**/*.out
-papers/**/*.synctex.gz
-papers/**/*.fls
-papers/**/*.fdb_latexmk
-papers/**/*.blg
-papers/**/*.bbl
+# Exclude papers/ folder (LaTeX sources are private)
+papers/
+
+# BUT include final PDFs for published papers
+!papers/**/*.pdf
 
 # Include papers_experiments/ (experimental code and notebooks for papers)
 !papers_experiments/

@@ -146,11 +146,9 @@ SEP/
 │   │       └── spec_v1_final.md  # The technical standard (Level 1)
 │   └── 02_research/           # Research documentation (M2-M4 series)
 │
-├── papers/                    # Published papers (LaTeX sources & PDFs)
+├── papers/                    # Published papers (PDFs only)
 │   └── Cross_Architecture_HDC_Transfer/
-│       ├── main.tex           # LaTeX source
-│       ├── Cross_Architecture_HDC_Transfer.pdf  # Published paper
-│       └── *.png              # Figures and results
+│       └── Cross_Architecture_HDC_Transfer.pdf  # Published paper
 │
 ├── papers_experiments/        # Reproducible experiments for papers
 │   └── Cross_Architecture_HDC_Transfer/
