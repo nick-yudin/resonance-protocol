@@ -80,7 +80,8 @@ Contains final PDF versions of published academic papers. LaTeX sources and work
 
 | Folder | Description | Status |
 |--------|-------------|--------|
-| `Cross_Architecture_HDC_Transfer/` | Paper on cross-architecture knowledge transfer via HDC | Published on [Zenodo](https://zenodo.org/records/18009693) |
+| `Cross_Architecture_HDC_Transfer/` | Cross-architecture knowledge transfer via HDC | Published on [Zenodo](https://zenodo.org/records/18009693) |
+| `Encoder_Free_HDC/` | Encoder-free text classification using HDC | Published on [Zenodo](https://doi.org/10.5281/zenodo.18025695) |
 
 **What's included in git:**
 - `*.pdf` - Final compiled PDFs only
@@ -99,7 +100,8 @@ Contains experimental code, Jupyter notebooks, and results that validate claims 
 
 | Paper | Folder | Contents |
 |-------|--------|----------|
-| Cross-Architecture HDC Transfer | `Cross_Architecture_HDC_Transfer/` | Notebooks, results, README |
+| Cross-Architecture HDC Transfer | `Cross_Architecture_HDC_Transfer/` | 2 notebooks, results, README |
+| Encoder-Free HDC | `Encoder_Free_HDC/` | 1 notebook, results, README |
 
 **Structure (per paper):**
 - `README.md` - Detailed experiment documentation

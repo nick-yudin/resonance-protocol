@@ -203,6 +203,7 @@ python quick_demo.py
 
 **Published Work:**
 - **"Cross-Architecture Knowledge Transfer via HDC"** (2025) — [Zenodo](https://zenodo.org/records/18009693) | [Experiments](./papers_experiments/Cross_Architecture_HDC_Transfer/)
+- **"Encoder-Free Text Classification Using Hyperdimensional Computing"** (2025) — [Zenodo](https://doi.org/10.5281/zenodo.18025695) | [Experiments](./papers_experiments/Encoder_Free_HDC/)
 
 ---
 

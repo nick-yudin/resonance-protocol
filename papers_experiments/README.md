@@ -28,7 +28,7 @@ papers_experiments/
 
 **Publication:** [Zenodo (2025)](https://zenodo.org/records/18009693)
 
-**Paper Source:** [papers/Cross_Architecture_HDC_Transfer/](../papers/Cross_Architecture_HDC_Transfer/)
+**Paper PDF:** [papers/Cross_Architecture_HDC_Transfer/](../papers/Cross_Architecture_HDC_Transfer/)
 
 **Experiments:** [Cross_Architecture_HDC_Transfer/](./Cross_Architecture_HDC_Transfer/)
 
@@ -44,14 +44,37 @@ papers_experiments/
 
 ---
 
+### 2. Encoder-Free Text Classification Using Hyperdimensional Computing
+
+**Publication:** [Zenodo (2025)](https://doi.org/10.5281/zenodo.18025695)
+
+**Paper PDF:** [papers/Encoder_Free_HDC/](../papers/Encoder_Free_HDC/)
+
+**Experiments:** [Encoder_Free_HDC/](./Encoder_Free_HDC/)
+
+**Key Results:**
+- Language ID (20 classes): 94.3% accuracy (5.1% gap to BERT)
+- Topic classification (4 classes): 76.8% accuracy (17.3% gap to BERT)
+- Sentiment analysis (2 classes): 70.7% accuracy (21.7% gap to BERT)
+- No neural networks, runs on <4KB memory microcontrollers
+
+**Notebooks:**
+- `Paper2_StatisticalValidation.ipynb` - Complete evaluation across 3 tasks with statistical validation
+
+---
+
 ## Running Experiments
 
 ### Prerequisites
 
 All notebooks are designed to run in **Google Colab** with the following requirements:
 
+**Paper 1 (Cross-Architecture HDC Transfer):**
 - **Experiment 1**: T4 or L4 GPU (16GB VRAM), ~2-3 hours runtime
 - **Experiment 2**: A100 GPU (40GB VRAM), ~3-4 hours runtime
+
+**Paper 2 (Encoder-Free HDC):**
+- **CPU only** (no GPU needed!), ~30-45 minutes runtime
 
 ### How to Run
 
